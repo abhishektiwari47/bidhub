@@ -26,13 +26,13 @@ router.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, function*
             msg: "err"
         });
     }
-    const { username, password } = req.body;
+    const { username, password, hostelName, hostelRoom, fullName } = req.body;
     const user = yield db_1.User.findOne({ username: username });
     if (user) {
         res.status(403).json({ message: 'User already exists' });
     }
     else {
-        const newUser = new db_1.User({ username: username, password: password, productId: [] });
+        const newUser = new db_1.User({ username: username, password: password, productId: [], hostelName, hostelRoom, fullName, balance: 100 });
         yield newUser.save();
         const token = jsonwebtoken_1.default.sign({ id: newUser._id }, index_1.SECRET, { expiresIn: '1h' });
         res.json({ message: 'User created successfully', token });

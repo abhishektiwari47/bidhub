@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
+    balance: {type:Number,required:true},
+    fullName:String,
+    hostelName:String,
+    hostelRoom:String,
     productId: [{ type: Schema.Types.ObjectId, ref: 'Product' }]
 });
 
@@ -12,8 +16,8 @@ const productSchema = new mongoose.Schema({
     description: String,
     originalPrice:Number,
     image:String,
-    maxBid:Number,
-    minBid:Number,
+    maxBid:{type:Number,required:true},
+    minBid:{type:Number,required:true},
     sold: Boolean,
     sellerId: String,
     buyerId: String

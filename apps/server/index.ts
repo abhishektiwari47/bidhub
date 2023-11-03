@@ -1,20 +1,19 @@
-
-
-
-
 import express from "express";
 import mongoose from "mongoose";
 const app = express();
 
 import authRoutes from "./routes/auth";
 import todoRoutes from "./routes/activities";
+import paymentRoutes from "./payment/createCheckoutSession"
+import eventRoutes from './payment/webhook';
 import cors from "cors";
 import { connectionString, port } from "./constants";
 
 app.use(cors());
-app.use(express.json());
-app.use("/auth", authRoutes);
-app.use("/todo", todoRoutes);
+app.use("/auth", express.json(), authRoutes);
+app.use("/todo", express.json(), todoRoutes);
+app.use("/pay", express.json(), paymentRoutes);
+app.use("/event",eventRoutes)
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
@@ -23,3 +22,6 @@ app.listen(port, () => {
 mongoose.connect(connectionString, { dbName: "bidhub" }).then(()=>{
     console.log("Connected to The database");
 });
+
+
+

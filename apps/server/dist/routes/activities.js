@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const index_1 = require("../middleware/index");
 const db_1 = require("../db");
+const mongoose_1 = __importDefault(require("mongoose"));
 const router = express_1.default.Router();
 router.post('/addProduct', index_1.authenticateJwt, (req, res) => {
     const { name, description, originalPrice, image, maxBid, minBid, } = req.body;
@@ -94,6 +95,7 @@ router.get('/getAllProducts', index_1.authenticateJwt, (req, res) => {
 router.put('/buy/:productId', index_1.authenticateJwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.headers["userId"];
     const productId = req.params.productId;
+    const sellPrice = req.body.price;
     try {
         const product = yield db_1.Product.findById(productId);
         if (!product) {
@@ -102,24 +104,29 @@ router.put('/buy/:productId', index_1.authenticateJwt, (req, res) => __awaiter(v
         if (product.sold == true) {
             return res.status(404).json({ error: 'Already Sold' });
         }
-        const user = yield db_1.User.findOneAndUpdate({ _id: userId }, { $push: { productId: productId } }, { new: true });
+        const user = yield db_1.User.findById(userId);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
+        if (user.balance < product.maxBid) {
+            return res.json({ message: "Low Balance" });
+        }
+        user.balance -= product.maxBid;
+        const productIdAsObjectId = new mongoose_1.default.Types.ObjectId(productId);
+        user.productId.push(productIdAsObjectId);
+        product.sold = true;
+        yield user.save();
+        yield product.save();
+        // const user = await User.findOneAndUpdate(
+        //   { _id: userId },
+        //   { $push: { productId: productId } },
+        //   { new: true }
+        // );
+        res.json({ message: "Done" });
     }
     catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Failed to update user or product' });
     }
-    db_1.Product.findOneAndUpdate({ _id: productId }, { sold: true, buyerId: userId })
-        .then((updatedProduct) => {
-        if (!updatedProduct) {
-            return res.status(404).json({ error: 'Product not found' });
-        }
-        res.json(updatedProduct);
-    })
-        .catch((err) => {
-        res.status(500).json({ error: 'Failed to update todo' });
-    });
 }));
 exports.default = router;

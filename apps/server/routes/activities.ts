@@ -2,6 +2,7 @@ import express from 'express';
 import { authenticateJwt } from "../middleware/index";
 import {SECRET} from '../constants/index';
 import { Product,User } from "../db";
+import mongoose from 'mongoose';
 const router = express.Router();
 
 interface CreateTodoInput {
@@ -104,6 +105,7 @@ router.get('/getAllProducts', authenticateJwt, (req, res) => {
 router.put('/buy/:productId', authenticateJwt, async (req, res) => {
   const userId = req.headers["userId"];
   const productId = req.params.productId;
+  const sellPrice = req.body.price;
 
   try {
     const product = await Product.findById(productId);
@@ -115,30 +117,34 @@ router.put('/buy/:productId', authenticateJwt, async (req, res) => {
     {
       return res.status(404).json({ error: 'Already Sold' });
     }
-    
-    const user = await User.findOneAndUpdate(
-      { _id: userId },
-      { $push: { productId: productId } },
-      { new: true }
-    );
-
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
+    if(user.balance<product.maxBid)
+    {
+      return res.json({message:"Low Balance"});
+    }
+
+    user.balance-=product.maxBid;
+    const productIdAsObjectId = new mongoose.Types.ObjectId(productId)
+    user.productId.push(productIdAsObjectId)
+    product.sold=true;
+    await user.save();
+    await product.save();
+    
+    // const user = await User.findOneAndUpdate(
+    //   { _id: userId },
+    //   { $push: { productId: productId } },
+    //   { new: true }
+    // );
+    res.json({message:"Done"});
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to update user or product' });
   }
 
-  Product.findOneAndUpdate({ _id: productId}, { sold: true, buyerId:userId  })
-  .then((updatedProduct) => {
-    if (!updatedProduct) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
-    res.json(updatedProduct);
-  })
-  .catch((err) => {
-    res.status(500).json({ error: 'Failed to update todo' });
-  });
+  
 });
 export default router;
