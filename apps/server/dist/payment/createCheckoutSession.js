@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
+const middleware_1 = require("../middleware");
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -19,10 +20,11 @@ const router = express.Router();
 app.use(cors());
 const stripe = require("stripe")("sk_test_51O6XH8SB4wTdUGUwGmOUHuqFJfHN5ymg7mYqyQWEldgXRQpifGQv8SE5KmlbUCCi0Y92sAS9woJv1rljV6FQJxQa00V7qVvBfR");
 let x = 10;
-router.post("/create-checkout-session", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post("/create-checkout-session", middleware_1.authenticateJwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const userId = req.headers["userId"];
         const amount = req.body.amount; // Set the fixed amount in cents (e.g., 10000 cents = 100 INR
-        const userId = req.body.userId;
+        // const userId = req.body.userId;
         const session = yield stripe.checkout.sessions.create({
             payment_method_types: ["card"],
             mode: "payment",
@@ -43,7 +45,7 @@ router.post("/create-checkout-session", (req, res) => __awaiter(void 0, void 0, 
                 },
             ],
             success_url: "https://google.com",
-            cancel_url: "https://facebook.com",
+            cancel_url: "https://facebook.com"
         });
         res.json({ url: session.url });
     }

@@ -1,5 +1,6 @@
 require("dotenv").config()
 import { Request, Response, NextFunction, json } from "express";
+import { authenticateJwt } from "../middleware";
 const express = require("express")
 const app = express()
 const cors = require("cors")
@@ -15,10 +16,12 @@ const stripe = require("stripe")("sk_test_51O6XH8SB4wTdUGUwGmOUHuqFJfHN5ymg7mYqy
 
 let x = 10;
 
-router.post("/create-checkout-session", async (req: Request, res: Response) => {
+
+router.post("/create-checkout-session",authenticateJwt, async (req: Request, res: Response) => {
     try {
+      const userId = req.headers["userId"];
       const amount = req.body.amount; // Set the fixed amount in cents (e.g., 10000 cents = 100 INR
-      const userId = req.body.userId;
+      // const userId = req.body.userId;
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",
@@ -39,7 +42,7 @@ router.post("/create-checkout-session", async (req: Request, res: Response) => {
           },
         ],
         success_url: "https://google.com",
-        cancel_url: "https://facebook.com",
+        cancel_url: "https://facebook.com"
       })
   
 
