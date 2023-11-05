@@ -1,6 +1,14 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
+const bidSchema = new mongoose.Schema({
+    amount: Number,
+    userId: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+    },
+  });
+
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
@@ -20,7 +28,8 @@ const productSchema = new mongoose.Schema({
     minBid:{type:Number,required:true},
     sold: Boolean,
     sellerId: String,
-    buyerId: String
+    buyerId: String,
+    bids:[bidSchema||null]
 });
 
 export const User = mongoose.model('User', userSchema);
