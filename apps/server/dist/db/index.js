@@ -6,6 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = exports.User = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
+const bidSchema = new mongoose_1.default.Schema({
+    amount: Number,
+    userId: {
+        type: mongoose_1.default.Types.ObjectId,
+        ref: 'User',
+    },
+});
 const userSchema = new mongoose_1.default.Schema({
     username: String,
     password: String,
@@ -24,7 +31,8 @@ const productSchema = new mongoose_1.default.Schema({
     minBid: { type: Number, required: true },
     sold: Boolean,
     sellerId: String,
-    buyerId: String
+    buyerId: String,
+    bids: [bidSchema || null]
 });
 exports.User = mongoose_1.default.model('User', userSchema);
 exports.Product = mongoose_1.default.model('Product', productSchema);

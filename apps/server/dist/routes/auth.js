@@ -34,7 +34,7 @@ router.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, function*
     else {
         const newUser = new db_1.User({ username: username, password: password, productId: [], hostelName, hostelRoom, fullName, balance: 100 });
         yield newUser.save();
-        const token = jsonwebtoken_1.default.sign({ id: newUser._id }, index_1.SECRET, { expiresIn: '1h' });
+        const token = jsonwebtoken_1.default.sign({ id: newUser._id }, index_1.SECRET, { expiresIn: '24h' });
         res.json({ message: 'User created successfully', token });
     }
 }));
