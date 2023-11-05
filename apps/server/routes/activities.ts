@@ -5,9 +5,9 @@ import { Product,User } from "../db";
 import mongoose from 'mongoose';
 const router = express.Router();
 
-interface CreateTodoInput {
-  title: string;
-  description: string;
+interface bid {
+  userId : mongoose.Types.ObjectId,
+  amount : number
 }
 
 router.post('/addProduct' , authenticateJwt, (req, res) => {
@@ -81,6 +81,7 @@ router.delete('/product/sold/:productId', authenticateJwt, (req, res) => {
       if (!updatedProduct) {
         return res.status(404).json({ error: 'Product not found' });
       }
+      
       res.json(updatedProduct);
     })
     .catch((err) => {
@@ -105,11 +106,11 @@ router.get('/getAllProducts', authenticateJwt, (req, res) => {
 router.put('/buy/:productId', authenticateJwt, async (req, res) => {
   const userId = req.headers["userId"];
   const productId = req.params.productId;
-  const sellPrice = req.body.price;
+  
 
   try {
     const product = await Product.findById(productId);
-
+    
     if (!product) {
       return res.status(404).json({ error: 'Product not found' });
     }
@@ -118,26 +119,58 @@ router.put('/buy/:productId', authenticateJwt, async (req, res) => {
       return res.status(404).json({ error: 'Already Sold' });
     }
     const user = await User.findById(userId);
-    if (!user) {
+    if (!user || userId==undefined) {
       return res.status(404).json({ error: 'User not found' });
     }
     if(user.balance<product.maxBid)
     {
       return res.json({message:"Low Balance"});
     }
+    const seller = await User.findById(product.sellerId);
+    if(!seller)
+    {
+      return res.json({message:"no seller with this userId"});
+    }
+    if(product.sellerId==userId)
+    {
+      return res.json({message:"You Can't Buy your own product"})
+    }
 
-    user.balance-=product.maxBid;
+    user.balance=user.balance-product.maxBid;
+    
     const productIdAsObjectId = new mongoose.Types.ObjectId(productId)
     user.productId.push(productIdAsObjectId)
-    product.sold=true;
-    await user.save();
-    await product.save();
+    product.buyerId= userId.toString();
+    product.sold=true; 
+    
+    console.log(seller.username);
+    console.log(seller.balance);
+    console.log(product.maxBid);
+    let x =seller.balance+product.maxBid;
+    seller.balance=x;
+
+    let allBids = product.bids;
+    
+    allBids.forEach( async (element,index,array) => {
+      const tempUser = await User.findById(element.userId);
+      if(tempUser && element.amount!=undefined){
+      tempUser.balance=tempUser.balance+element.amount;
+      await tempUser.save();
+      }
+    });
+    
+    product.bids = new mongoose.Types.DocumentArray([]);
+  
+   
     
     // const user = await User.findOneAndUpdate(
     //   { _id: userId },
     //   { $push: { productId: productId } },
     //   { new: true }
     // );
+    await product.save();
+    await user.save();
+    await seller.save();
     res.json({message:"Done"});
 
   } catch (err) {
