@@ -65,20 +65,37 @@ router.get('/yourBoughtProducts', index_1.authenticateJwt, (req, res) => {
         res.status(500).json({ error: 'Failed to retrieve todos' });
     });
 });
-router.delete('/product/sold/:productId', index_1.authenticateJwt, (req, res) => {
+router.delete('/product/sold/:productId', index_1.authenticateJwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { productId } = req.params;
     const userId = req.headers["userId"];
-    db_1.Product.deleteOne({ _id: productId, sellerId: userId })
-        .then((updatedProduct) => {
-        if (!updatedProduct) {
-            return res.status(404).json({ error: 'Product not found' });
+    // Product.deleteOne({ _id: productId, sellerId:userId })
+    //   .then((updatedProduct) => {
+    //     if (!updatedProduct) {
+    //       return res.status(404).json({ error: 'Product not found' });
+    //     }
+    //     res.json(updatedProduct);
+    //   })
+    //   .catch((err) => {
+    //     res.status(500).json({ error: 'Failed to update todo' });
+    //   });
+    const product = yield db_1.Product.findOne({ _id: productId, sellerId: userId });
+    if (!product) {
+        return res.json({ error: "There is no product with this product Id or sellerId" });
+    }
+    if (product.sold === true) {
+        return res.json({ error: "Can't Delete a product after sell" });
+    }
+    let allBids = product.bids;
+    allBids.forEach((element, index, array) => __awaiter(void 0, void 0, void 0, function* () {
+        const tempUser = yield db_1.User.findById(element.userId);
+        if (tempUser && element.amount != undefined) {
+            tempUser.balance = tempUser.balance + element.amount;
+            yield tempUser.save();
         }
-        res.json(updatedProduct);
-    })
-        .catch((err) => {
-        res.status(500).json({ error: 'Failed to update todo' });
-    });
-});
+    }));
+    yield product.deleteOne();
+    res.json({ message: "Product Deleted" });
+}));
 router.get('/getAllProducts', index_1.authenticateJwt, (req, res) => {
     const userId = req.headers["userId"];
     db_1.Product.find()
@@ -122,11 +139,75 @@ router.put('/buy/:productId', index_1.authenticateJwt, (req, res) => __awaiter(v
         user.productId.push(productIdAsObjectId);
         product.buyerId = userId.toString();
         product.sold = true;
-        console.log(seller.username);
-        console.log(seller.balance);
-        console.log(product.maxBid);
         let x = seller.balance + product.maxBid;
         seller.balance = x;
+        let allBids = product.bids;
+        allBids.forEach((element, index, array) => __awaiter(void 0, void 0, void 0, function* () {
+            const tempUser = yield db_1.User.findById(element.userId);
+            if (tempUser && element.amount != undefined) {
+                tempUser.balance = tempUser.balance + element.amount;
+                yield tempUser.save();
+            }
+        }));
+        product.bids = new mongoose_1.default.Types.DocumentArray([]);
+        // const user = await User.findOneAndUpdate(
+        //   { _id: userId },
+        //   { $push: { productId: productId } },
+        //   { new: true }
+        // );
+        yield product.save();
+        yield user.save();
+        yield seller.save();
+        res.json({ message: "Done" });
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to update user or product' });
+    }
+}));
+router.post('/acceptABid/:productId', index_1.authenticateJwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const sellerId = req.headers["userId"];
+    const userId = req.body.userId;
+    const productId = req.params.productId;
+    try {
+        const product = yield db_1.Product.findById(productId);
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        if (product.sold == true) {
+            return res.status(404).json({ error: 'Already Sold' });
+        }
+        const user = yield db_1.User.findById(userId);
+        if (!user || userId == undefined) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        // if(user.balance<product.maxBid)
+        // {
+        //   return res.json({message:"Low Balance"});
+        // }
+        const seller = yield db_1.User.findById(sellerId);
+        if (!seller) {
+            return res.json({ message: "no seller with this userId" });
+        }
+        if (product.sellerId == userId) {
+            return res.json({ message: "You Can't Buy your own product" });
+        }
+        const productIdAsObjectId = new mongoose_1.default.Types.ObjectId(productId);
+        user.productId.push(productIdAsObjectId);
+        product.buyerId = userId.toString();
+        product.sold = true;
+        const findBidIndex = product.bids.findIndex((bid) => {
+            var _a, _b;
+            if (bid.amount != undefined && ((_a = bid === null || bid === void 0 ? void 0 : bid.userId) === null || _a === void 0 ? void 0 : _a.toString()) == userId) {
+                let x = seller.balance + bid.amount;
+                user.balance = user.balance - bid.amount;
+                seller.balance = x;
+            }
+            return ((_b = bid === null || bid === void 0 ? void 0 : bid.userId) === null || _b === void 0 ? void 0 : _b.toString()) == userId;
+        });
+        if (findBidIndex == -1) {
+            return res.json({ error: "No Bid for this user" });
+        }
         let allBids = product.bids;
         allBids.forEach((element, index, array) => __awaiter(void 0, void 0, void 0, function* () {
             const tempUser = yield db_1.User.findById(element.userId);
