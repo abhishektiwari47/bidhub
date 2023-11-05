@@ -22,7 +22,7 @@ router.post('/signup', async (req, res) => {
     } else {
       const newUser = new User({ username:username, password:password,productId:[],hostelName,hostelRoom,fullName,balance:100});
       await newUser.save();
-      const token = jwt.sign({ id: newUser._id }, SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ id: newUser._id }, SECRET, { expiresIn: '24h' });
       res.json({ message: 'User created successfully', token });
     }
   });
