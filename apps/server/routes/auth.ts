@@ -15,12 +15,12 @@ router.post('/signup', async (req, res) => {
         msg:"err"
       })
     }
-    const {username,password,hostelName,hostelRoom,fullName} = req.body;
+    const {username,password,hostelName,hostelRoom,fullName,imageLink} = req.body;
     const user = await User.findOne({ username: username});
     if (user) {
       res.status(403).json({ message: 'User already exists' });
     } else {
-      const newUser = new User({ username:username, password:password,productId:[],hostelName,hostelRoom,fullName,balance:100});
+      const newUser = new User({ username:username, password:password,productId:[],hostelName,hostelRoom,fullName,balance:100,imageLink});
       await newUser.save();
       const token = jwt.sign({ id: newUser._id }, SECRET, { expiresIn: '24h' });
       res.json({ message: 'User created successfully', token });
@@ -49,7 +49,7 @@ router.get('/me', authenticateJwt, async (req, res) => {
       const userId = req.headers["userId"];
       const user = await User.findOne({ _id: userId });
       if (user) {
-        res.json({ username: user.username });
+        res.json({ userId:userId,username: user.username,fullName:user.fullName,hostelName:user.hostelName,hostelRoom:user.hostelRoom,balance:user.balance,productId:user.productId,imageLink:user.imageLink});
       } else {
         res.status(403).json({ message: 'User not logged in' });
       }
