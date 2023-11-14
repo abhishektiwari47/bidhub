@@ -29,7 +29,8 @@ router.post('/addProduct' , authenticateJwt, (req, res) => {
     minBid,
     sold,
     sellerId,
-    buyerId
+    buyerId,
+    sellPrice:0
   });
 
   newProduct.save()
@@ -103,6 +104,7 @@ router.delete('/product/sold/:productId', authenticateJwt, async (req, res) => {
   allBids.forEach( async (element,index,array) => {
     const tempUser = await User.findById(element.userId);
     if(tempUser && element.amount!=undefined){ 
+    
     tempUser.balance=tempUser.balance+element.amount;
     await tempUser.save();
     }
@@ -159,9 +161,10 @@ router.put('/buy/:productId', authenticateJwt, async (req, res) => {
     {
       return res.json({message:"You Can't Buy your own product"})
     }
-
+    console.log(product.maxBid);
+    console.log(user.balance);
     user.balance=user.balance-product.maxBid;
-    
+    product.sellPrice=product.maxBid
     const productIdAsObjectId = new mongoose.Types.ObjectId(productId)
     user.productId.push(productIdAsObjectId)
     product.buyerId= userId.toString();
@@ -175,6 +178,8 @@ router.put('/buy/:productId', authenticateJwt, async (req, res) => {
     allBids.forEach( async (element,index,array) => {
       const tempUser = await User.findById(element.userId);
       if(tempUser && element.amount!=undefined){
+      console.log(tempUser.balance);
+      
       tempUser.balance=tempUser.balance+element.amount;
       await tempUser.save();
       }
@@ -245,6 +250,7 @@ router.post('/acceptABid/:productId',authenticateJwt,async (req,res)=>{
       if(bid.amount!=undefined && bid?.userId?.toString()==userId){
       let x =seller.balance+bid.amount;
       user.balance=user.balance-bid.amount;
+      product.sellPrice=bid.amount;
       seller.balance=x;
       }
       return bid?.userId?.toString()==userId})
