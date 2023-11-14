@@ -1,35 +1,65 @@
-import { useState } from 'react'
+import { useEffect, useState , lazy,Suspense } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+const Auth = lazy(() => import('./components/visitor/Authentication'));
+import { useSetRecoilState } from 'recoil';
+import { authState } from './store/authState';
+import { useNavigate } from 'react-router-dom';
+import Home from './components/visitor/Home';
+import NoMatch from './components/visitor/NoMatch';
+import AllYourBid from './components/buyer/AllYourBids';
+import AddProduct from './components/seller/AddProduct';
+import Account from './components/visitor/Account';
+const AllProduct = lazy(()=>import('./components/visitor/AllProducts')) ;
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Router>
+    <InitState />
+    <Routes>
+        <Route path='/auth' element={<Auth />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/allYourBids' element={<AllYourBid/>}/>
+        <Route path='/addAProduct' element={<AddProduct/>}/>
+       
+        <Route path='/allProduct' element={<AllProduct/>}/>
+       
+        <Route path='/Account' element={<Account/>}/>
+        <Route path='/' element={<InitState/>} />
+        <Route path="*" element={<NoMatch />} />
+    </Routes>
+</Router>
   )
 }
+
+function InitState() {
+  const setAuth = useSetRecoilState(authState);
+  const navigate = useNavigate();
+
+  const init = async () => {
+      const token = localStorage.getItem("token");
+      try {
+          const response = await fetch('http://localhost:4242/auth/me', {
+              headers: { Authorization: `Bearer ${token}` }
+          });
+          const data = await response.json();
+          if (data.username) {
+              setAuth({ token: data.token, username: data.username });
+              navigate("/home");
+          } else {
+              navigate("/auth");
+          }
+      } catch (e) {
+          navigate("/auth");
+      }
+  }
+  useEffect(() => {
+      init();
+  }, [])
+  return <></>
+}
+
 
 export default App
