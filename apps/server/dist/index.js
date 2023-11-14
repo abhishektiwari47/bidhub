@@ -15,7 +15,7 @@ const cors_1 = __importDefault(require("cors"));
 const constants_1 = require("./constants");
 app.use((0, cors_1.default)());
 app.use("/auth", express_1.default.json(), auth_1.default);
-app.use("/todo", express_1.default.json(), activities_1.default);
+app.use("/general", express_1.default.json(), activities_1.default);
 app.use("/pay", express_1.default.json(), createCheckoutSession_1.default);
 app.use("/event", webhook_1.default);
 app.use("/bid", express_1.default.json(), bid_1.default);

@@ -74,19 +74,52 @@ router.get('/allYourBids', middleware_1.authenticateJwt, (req, res) => __awaiter
         'bids.userId': userId, // Match the bid by the specific user
     });
     if (productWhereThisUserHasBid) {
-        return res.json({ productWhereThisUserHasBid });
+        return res.json(productWhereThisUserHasBid);
     }
     else {
         return res.json({ message: "No bidding done by You" });
     }
 }));
 router.delete('/removeBid/:productId', middleware_1.authenticateJwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const productId = req.params;
     const userId = req.headers["userId"];
-    const productWhereThisUserHasBid = yield db_1.Product.findOneAndRemove({
-        'bids.userId': userId, // Match the bid by the specific user
+    let amount;
+    const productWhereThisUserHasBid = yield db_1.Product.findOne({
+        'bids.userId': userId
     });
     if (productWhereThisUserHasBid) {
-        return res.json({ productWhereThisUserHasBid });
+        const bid = productWhereThisUserHasBid.bids.find(bid => bid.userId == userId);
+        if (bid) {
+            amount = bid.amount;
+            // Now, 'amount' contains the amount of the bid made by the user.
+            console.log(amount);
+        }
+        else {
+            console.log("Bid not found for this user");
+        }
+    }
+    else {
+        console.log("Product not found");
+    }
+    let user = yield db_1.User.findById(userId);
+    if (productWhereThisUserHasBid && user) {
+        user.balance = user.balance + Number(amount);
+        yield user.save();
+        const bidIndex = productWhereThisUserHasBid.bids.findIndex(bid => bid.userId == userId);
+        if (bidIndex !== -1) {
+            productWhereThisUserHasBid.bids.splice(bidIndex, 1);
+            yield productWhereThisUserHasBid.save();
+            return res.json({ message: "Bid removed successfully" });
+        }
+        else {
+            return res.json({ error: "Bid not found for this user" });
+        }
+    }
+    else if (!user) {
+        return res.json({ error: "User not found" });
+    }
+    else if (!productWhereThisUserHasBid) {
+        return res.json({ error: "Product not found" });
     }
     else {
         return res.json({ message: "No bidding done by You" });

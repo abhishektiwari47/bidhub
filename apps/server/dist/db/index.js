@@ -20,6 +20,7 @@ const userSchema = new mongoose_1.default.Schema({
     fullName: String,
     hostelName: String,
     hostelRoom: String,
+    imageLink: String,
     productId: [{ type: Schema.Types.ObjectId, ref: 'Product' }]
 });
 const productSchema = new mongoose_1.default.Schema({
@@ -30,6 +31,7 @@ const productSchema = new mongoose_1.default.Schema({
     maxBid: { type: Number, required: true },
     minBid: { type: Number, required: true },
     sold: Boolean,
+    sellPrice: Number || undefined,
     sellerId: String,
     buyerId: String,
     bids: [bidSchema || null]
