@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const app = express();
 
 import authRoutes from "./routes/auth";
-import todoRoutes from "./routes/activities";
+import generalRoutes from "./routes/activities";
 import paymentRoutes from "./payment/createCheckoutSession"
 import eventRoutes from './payment/webhook';
 import bidRoutes from './payment/bid';
@@ -12,7 +12,7 @@ import { connectionString, port } from "./constants";
 
 app.use(cors());
 app.use("/auth", express.json(), authRoutes);
-app.use("/todo", express.json(), todoRoutes);
+app.use("/general", express.json(), generalRoutes);
 app.use("/pay", express.json(), paymentRoutes);
 app.use("/event",eventRoutes)
 app.use("/bid",express.json(),bidRoutes);
