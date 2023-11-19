@@ -41,8 +41,8 @@ router.post("/create-checkout-session",authenticateJwt, async (req: Request, res
             quantity: 1, 
           },
         ],
-        success_url: "https://google.com",
-        cancel_url: "https://facebook.com"
+        success_url: "http://localhost:5173/home",
+        cancel_url: "http://localhost:5173/home"
       })
   
 
