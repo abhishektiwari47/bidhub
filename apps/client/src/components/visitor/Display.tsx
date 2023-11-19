@@ -5,8 +5,10 @@ import AllProduct from "./AllProducts";
 import AllYourBid from "../buyer/AllYourBids";
 import AllYourBoughtProducts from "../buyer/YourBoughtProducts";
 import ProductForSell from "../seller/ProductForSell";
-import Account from "./Account";
+import AccountComponent from "./Account";
 import AddMoney from "./AddMoney";
+
+const {Account} = AccountComponent;
 // const AllProduct = lazy(() => import('./AllProducts'));
 // const AllYourBid = lazy(() => import('../buyer/AllYourBids'));
 // const AllYourBoughtProducts = lazy(() => import('../buyer/YourBoughtProducts'));
@@ -34,7 +36,7 @@ export function DisplayArea(){
         }
     }
     
-    return <div className="part" style={{width:"75%",display:"inline-grid",gridTemplateColumns:"repeat(2, 1fr)",maxHeight:"80vh",overflow:(activeListItem==0||activeListItem==1||activeListItem==2||activeListItem==3)?"auto":"hidden",verticalAlign:"top", backgroundColor:"red"}}>
+    return <div className="part" style={{width:"75%",display:(activeListItem==0 || activeListItem==1)?"inline-grid":"inline-block",gridTemplateColumns:"repeat(2, 1fr)",maxHeight:"80vh",overflow:(activeListItem==0||activeListItem==1||activeListItem==2||activeListItem==3)?"auto":"hidden",verticalAlign:"top", backgroundColor:"red"}}>
      {renderPage()}
    </div>
 }
