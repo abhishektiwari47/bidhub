@@ -1,4 +1,9 @@
 import mongoose, { mongo } from "mongoose";
+import { useRecoilState } from "recoil";
+import { buyProductState, buyState } from "../../data/RelatedStates";
+import axios from "axios";
+import { productListState,singleProductDataState, userData } from "../../data/ComponentData";
+import { useNavigate } from "react-router-dom";
 
 interface Bid {
     amount: number,
@@ -22,8 +27,14 @@ interface Bid {
     bids: Bid[];
   }
 
-function ProductCard(allProducts:{data:Product,userId:string},){
+function ProductCard(allProducts:{data:Product,userId:string}){
+  const navigate = useNavigate();
+  const [user,setUser] = useRecoilState(userData)
+  const [isBuyPressed, setBuyPressed] = useRecoilState(buyState);
+  const [productId,setProductId] = useRecoilState(buyProductState);
     const {data,userId} = allProducts
+    const [productData,setProductData] = useRecoilState(singleProductDataState);
+   
     function getUserBid(productBid:Bid[], userId:string) {
       if (userId === "") {
         return 0;
@@ -43,8 +54,8 @@ function ProductCard(allProducts:{data:Product,userId:string},){
         <h4><b>{data.name.toString()}</b></h4>
         {(userId=="")?
         <div>
-        <button className="Buy">Buy</button>
-        <button className="Bid">Bid</button>
+        <button onClick={()=>{setBuyPressed(true); setProductId(data._id);}} className="Buy">Buy</button>
+        <button onClick={()=>{navigate(`/addBid/${data}`); setProductData(data);}} className="Bid">Bid</button>
         </div>:<div>
             <p>Your Bid : {userBidAmount} INR</p>
         </div>}
