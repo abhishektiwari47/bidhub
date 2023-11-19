@@ -6,6 +6,7 @@ import { User } from "../db";
 import {z} from 'zod';
 const router = express.Router();
 import {InputValidation} from 'validation';
+import mongoose from "mongoose";
 
 router.post('/signup', async (req, res) => {
     const parseResponse = InputValidation.safeParse(req.body);
@@ -54,5 +55,17 @@ router.get('/me', authenticateJwt, async (req, res) => {
         res.status(403).json({ message: 'User not logged in' });
       }
     });
+router.get('/getSeller/:sellerId',authenticateJwt,async (req,res)=>{
+  const {sellerId} = req.params;
+  console.log("this is seller id");
+  
+  console.log(sellerId)
+  const seller = await User.findOne({ _id: sellerId });
+      if (seller) {
+        res.json({ userId:sellerId,username: seller.username,fullName:seller.fullName,hostelName:seller.hostelName,hostelRoom:seller.hostelRoom,balance:seller.balance,productId:seller.productId,imageLink:seller.imageLink});
+      } else {
+        res.status(403).json({ message: 'User not logged in' });
+      }
+})
 
   export default router
