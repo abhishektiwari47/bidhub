@@ -25,4 +25,30 @@ const productBidsListState = atom({
   default:[]
 })
 
-export {userData,productListState,productBidsListState}
+interface Bid {
+  amount: number;
+  userId: mongoose.Types.ObjectId;
+}
+
+interface Product {
+  _id: string;
+  name: string;
+  description: string;
+  originalPrice: number;
+  image: string;
+  maxBid: { type: number; required: true };
+  minBid: { type: number; required: true };
+  sold: boolean;
+  sellPrice: number;
+  sellerId: string;
+  buyerId: string;
+  bids: Bid[];
+}
+
+const singleProductDataState = atom<Product>({
+  key: 'singleProductDataState',
+  default: undefined,
+});
+
+
+export {userData,productListState,productBidsListState,singleProductDataState}
