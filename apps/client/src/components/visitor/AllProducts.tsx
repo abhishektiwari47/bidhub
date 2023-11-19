@@ -1,15 +1,19 @@
 import axios from "axios";
 import {useEffect} from 'react';
-import { productListState } from "../../data/ComponentData";
+import { productListState, userData } from "../../data/ComponentData";
 import { useRecoilState } from "recoil";
 import mongoose from "mongoose";
 import ProductCard from "./ProductCard";
+import { buyState } from "../../data/RelatedStates";
 
 
 
 
 function AllProduct(){
+   
     const [productList,setProductList]=useRecoilState(productListState)
+    const [user]=useRecoilState(userData)
+    
     async function getAllProductList()
     {
         const authorization = "Bearer "+localStorage.getItem('token');
@@ -29,7 +33,6 @@ function AllProduct(){
         }
         else{
             console.log("something went wrong in all products.tsx");
-            
         }
       }
       fetchData();
@@ -37,7 +40,7 @@ function AllProduct(){
   
     
     return <>
-    {productList.map((element:any,index:number) => {
+    {productList.filter((element: any) => (!element.sold&& user.userId!=element.sellerId)).map((element:any,index:number) => {
        return <ProductCard key={index} data={element} userId={""}/>
     })}
     
