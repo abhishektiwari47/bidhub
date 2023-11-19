@@ -4,6 +4,10 @@ const fontSizeState = atom({
     key: 'fontSizeState',
     default: 14,
   });
+const buyProductState = atom({
+  key:'buyProductState',
+  default:""
+})
   
   const activeListItemstate= atom({
     key: 'activeListIemState',
@@ -12,6 +16,10 @@ const fontSizeState = atom({
 
   const logoutState = atom({
     key:'logoutState',
+    default:false
+  })
+  const buyState = atom({
+    key:'buyState',
     default:false
   })
 const fontSizeLabelState = selector({
@@ -23,4 +31,4 @@ const fontSizeLabelState = selector({
       return `${fontSize}${unit}`;
     },
   });
-export {fontSizeState,fontSizeLabelState,activeListItemstate,logoutState};
+export {fontSizeState,fontSizeLabelState,activeListItemstate,logoutState,buyState,buyProductState};
