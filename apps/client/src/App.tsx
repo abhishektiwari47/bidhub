@@ -11,7 +11,9 @@ import Home from './components/visitor/Home';
 import NoMatch from './components/visitor/NoMatch';
 import AllYourBid from './components/buyer/AllYourBids';
 import AddProduct from './components/seller/AddProduct';
-import Account from './components/visitor/Account';
+import Accounts from './components/visitor/Account';
+import AddBid from './components/buyer/AddBid';
+const {Account} =Accounts;
 const AllProduct = lazy(()=>import('./components/visitor/AllProducts')) ;
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
     <InitState />
     <Routes>
         <Route path='/auth' element={<Auth />} />
+        <Route path='/addBid/:id' element={<AddBid />} />
         <Route path='/home' element={<Home />} />
         <Route path='/allYourBids' element={<AllYourBid/>}/>
         <Route path='/addAProduct' element={<AddProduct/>}/>
