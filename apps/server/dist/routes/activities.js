@@ -60,7 +60,7 @@ router.get('/yourBoughtProducts', index_1.authenticateJwt, (req, res) => {
             res.sendStatus(4002);
         }
         else
-            res.json({ productId: user.productId });
+            res.json(user.productId);
     })
         .catch((err) => {
         res.status(500).json({ error: 'Failed to retrieve todos' });
