@@ -35,8 +35,9 @@ export function DisplayArea(){
            
         }
     }
+
     
-    return <div className="part" style={{width:"75%",display:(activeListItem==0 || activeListItem==1)?"inline-grid":"inline-block",gridTemplateColumns:"repeat(2, 1fr)",maxHeight:"80vh",overflow:(activeListItem==0||activeListItem==1||activeListItem==2||activeListItem==3)?"auto":"hidden",verticalAlign:"top", backgroundColor:"red"}}>
+    return <div className="part" style={{width:"80%",display:(activeListItem==0 || activeListItem==1)?"inline-grid":"inline-block",gridTemplateColumns:"repeat(2, 1fr)",maxHeight:"70vh",overflow:(activeListItem==0||activeListItem==1||activeListItem==2||activeListItem==3)?"auto":"hidden",verticalAlign:"top", backgroundColor:"white"}}>
      {renderPage()}
    </div>
 }
