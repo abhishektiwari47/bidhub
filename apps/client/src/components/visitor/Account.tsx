@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil";
 import { userData } from "../../data/ComponentData";
+import Profile from '../../assets/svg/Profile.svg';
 
 type userType = {
     userId: string;
@@ -18,7 +19,9 @@ type userType = {
   }
   
 function ProfilePhoto(props:propsType){
-    return <span ><img style={{height:`${props.dimention}vh`, width:`${props.dimention}vh`, borderRadius:"50%",objectFit:"cover", backgroundColor:"red"}} src={props.user.imageLink.toString()} alt="" /></span>
+    return <span ><img
+     className=""
+     style={{height:`${props.dimention}vh`, width:`${props.dimention}vh`, borderRadius:"50%",objectFit:"cover", }} src={(props.user.imageLink.toString()==="")?Profile:props.user.imageLink.toString()} alt="" /></span>
  }
 
 function Account(){
