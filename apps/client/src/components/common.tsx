@@ -1,4 +1,5 @@
 export function VerticalLine(){
-    return   <div  style={{borderLeft:"2px solid #000",height:"80vh",display:"inline-block"}}>
+
+    return   <div className="hidden sm:inline-block"  style={{borderLeft:"1px solid grey",height:"70vh"}}>
     </div>
 }
