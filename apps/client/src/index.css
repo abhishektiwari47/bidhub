@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn-primary {
+      @apply py-2 block bg-[#FF6B00] text-white font-semibold rounded-lg shadow-md hover:bg-[#ff4800] focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-75;
+    }
+    .input1{
+      @apply w-full focus:outline-none  border-[#808080] text-[#000000] text-[18px] font-medium border-b-2 mt-2 mb-2;
+    }
+  }
