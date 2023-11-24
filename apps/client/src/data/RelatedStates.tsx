@@ -31,4 +31,13 @@ const fontSizeLabelState = selector({
       return `${fontSize}${unit}`;
     },
   });
-export {fontSizeState,fontSizeLabelState,activeListItemstate,logoutState,buyState,buyProductState};
+const cameraOpenState = atom({
+  key:"cameraOpenState",
+  default:false
+})
+const menuState = atom({
+  key:"menuState",
+  default:false
+
+})
+export {fontSizeState,fontSizeLabelState,activeListItemstate,logoutState,buyState,buyProductState,cameraOpenState,menuState};
