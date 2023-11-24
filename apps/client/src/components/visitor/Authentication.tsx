@@ -2,6 +2,7 @@
 import {Link,useNavigate} from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
+import BidhubDesign from '../../assets/svg/BidhubDesign.svg';
 
 function Auth(){
   const [showComponentA, setShowComponentA] = useState(true);
@@ -10,19 +11,20 @@ function Auth(){
     setShowComponentA(!showComponentA);
   };
 
+
+
   return (
-    <div>
-      <span>
-        <div>Welcome to BidHub</div>
-        <div></div>
-      </span>
-      <span>
+    <div className='block mx-auto sm:h-screen sm:flex sm:items-start'>
+      <div className='block  w-2/3  h-screen mx-auto sm:inline-block sm:mx-0 '>
+        <div className="h-[0.3] py-[20%] sm:p-10 text-[35px] text-center sm:text-left">Welcome to <h1 className='text-[70px] text-[#FF6B00]'>BidHub</h1></div>
+        <div><img className=' sm:block h-[50vh] mt-10 mb-10' src={BidhubDesign} alt="" /></div>
+      </div>
+      <div className='border-solid m-5 sm:m-0 border-2 block lg:w-1/4 h-[80vh] sm:mt-[10vh] sm:mb-[10vh] py-2 px-10 '>
+      {showComponentA ? <Login/> : <Signup />}
       
-      {showComponentA ? <Login /> : <Signup />}
-      <p>{showComponentA ? "New User? " : "Existing User? "}
-      <a onClick={toggleComponent}>{showComponentA ? "SignUp" : "Login"}</a></p>
-      </span>
-      
+      <p className='font-medium text-center m-3'>{showComponentA ? "New User? " : "Existing User? "}
+      <a className='text-[#FF6B00] ' onClick={toggleComponent}>{showComponentA ? "SignUp" : "Login"}</a></p>
+      </div>
     </div>
   );
 }
@@ -45,18 +47,18 @@ const Login = () => {
   };
 
   return (
-      <div>
-          <div className='authCard'>
-              <h2>Login</h2>
-              <p>User Name</p>
-              <input type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
-              <p>Password</p>
-              <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+      <div >
+          <div>
+              <h2 className='text-center text-[20px] font-medium pb-5'>Login</h2>
+              <p className='text-[#808080]'>User Name</p>
+              <input className='input1' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
+              <p className='text-[#808080]'>Password</p>
+              <input className='input1' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
              
-              <button onClick={handleLogin}>Login</button>
+              <button className='btn-primary px-10 sm:w-2/3 md:w-2/3 lg:w-2/3 mx-auto mt-[36.3vh]' onClick={handleLogin}>Login</button>
           </div>
       </div>
-  );
+  )
 };
 
  const Signup = () => {
@@ -71,7 +73,8 @@ const Login = () => {
     password: password,
     hostelName:hostelName,
     fullName:fullName,
-    hostelRoom:hostelRoom
+    hostelRoom:hostelRoom,
+    imageLink:"",
   }
   const handleSignup = async () => {
       // const response = await fetch("http://localhost:4242/auth/signup", {
@@ -94,18 +97,18 @@ const Login = () => {
   return (
       <div>
           <div className='authCard'>
-              <h2>Signup</h2>
-              <p>User Name</p>
-              <input type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
-              <p>Password</p>
-              <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-              <p>Full Name</p>
-              <input type='text' value={fullName} onChange={(e) => setFullName(e.target.value)} />
-              <p>Hostel Name</p>
-              <input type='text' value={hostelName} onChange={(e) => setHostelName(e.target.value)} />
-              <p>Hostel Room</p>
-              <input type='text' value={hostelRoom} onChange={(e) => setHostelRoom(e.target.value)} />
-              <button onClick={handleSignup}>Signup</button>
+              <h2 className='text-center text-[20px] font-medium pb-5'>Signup</h2>
+              <p className='text-[#808080]'>User Name</p>
+              <input className='input1' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
+              <p className='text-[#808080]'>Password</p>
+              <input className='input1' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+              <p className='text-[#808080]'>Full Name</p>
+              <input  className='input1' type='text' value={fullName} onChange={(e) => setFullName(e.target.value)} />
+              <p className='text-[#808080]'>Hostel Name</p>
+              <input className='input1'  type='text' value={hostelName} onChange={(e) => setHostelName(e.target.value)} />
+              <p className='text-[#808080]'>Hostel Room</p>
+              <input className='input1'  type='text' value={hostelRoom} onChange={(e) => setHostelRoom(e.target.value)} />
+              <button className='btn-primary sm:w-2/3 md:w-2/3 lg:w-2/3 mx-auto mt-[5vh]' onClick={handleSignup}>Signup</button>
           </div>
       </div>
   );
