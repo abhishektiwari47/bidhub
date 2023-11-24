@@ -16,6 +16,11 @@ import mongoose from 'mongoose';
     },
   });
 
+  const imageState = atom<string>({
+    key:"imageState",
+    default:undefined
+  })
+
  const productListState = atom({
   key:"productListState",
   default:[]
@@ -51,4 +56,4 @@ const singleProductDataState = atom<Product>({
 });
 
 
-export {userData,productListState,productBidsListState,singleProductDataState}
+export {userData,productListState,productBidsListState,singleProductDataState,imageState}
