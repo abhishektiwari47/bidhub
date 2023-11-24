@@ -2,9 +2,9 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import imageLink from "../../assets/imageLink";
 import {productListState, userData} from "../../data/ComponentData"
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AddMoneyIcon from '../../assets/svg/AddMoneyIcon.svg';
-import {  activeListItemstate, buyProductState, buyState, logoutState } from "../../data/RelatedStates";
+import {  activeListItemstate, buyProductState, buyState, logoutState, menuState } from "../../data/RelatedStates";
 import MenuList from "./MenuList";
 import { VerticalLine } from "../common";
 import { DisplayArea } from "./Display";
@@ -12,6 +12,10 @@ import mongoose from "mongoose";
 import { Navigate, useNavigate } from "react-router-dom";
 import UserAccount from './Account';
 const {ProfilePhoto}=UserAccount;
+import SearchIcon from '../../assets/svg/SearchIcon.svg';
+import menu from '../../assets/svg/menu.svg';
+import x from '../../assets/svg/x.svg';
+
 
 function Home()
 {
@@ -68,7 +72,7 @@ function Home()
     }
 
     const [productList,setProductList]=useRecoilState(productListState)
-    
+    const [menuOpen,setMenuOpen] = useRecoilState(menuState)
     
     const [productId,setProductId] = useRecoilState(buyProductState)
     async function buyAProduct()
@@ -141,21 +145,25 @@ function Home()
 
     const [activeListItem,setActiveListItem] = useRecoilState(activeListItemstate)
 
+    const searchHolder = `Hi ${user.username.toString()} , search for a here...`;
     
-    
-    return <div>
-        <nav>
+    return <div >
+        <nav className="flex items-center justify-between m-5">
+            <span className="hidden  sm:flex items-center space-x-4">
             <ProfilePhoto user={user} dimention={7}/>
-            <span>{user.username.toString()}</span>
-            <span><input type="text" name="" id="" placeholder="Hi Abhishek , search for a product here..."/></span>
-            <span>{user.balance.toString()} INR<img onClick={()=>setActiveListItem(5)} src={AddMoneyIcon} alt="Add Money" /></span>
+            <span className="font-medium">{user.username.toString()}</span></span>
+            <span className="w-[80vw] sm:w-[40vw] border-b-2 px-4 flex m-auto" ><input className="w-[80vw] focus:outline-none" type="text" name="" id="" placeholder={searchHolder}/><img src={SearchIcon} alt="" /></span>
+            <span className="hidden sm:flex  items-center space-x-4 "><span>{user.balance.toString()} INR</span> <img onClick={()=>setActiveListItem(5)} src={AddMoneyIcon} alt="Add Money" /></span>
         </nav>
-    <main>
-    <button onClick={()=>navigate("/addAProduct")} style={{display:"inline"}}>Sell Your Product</button>
+    <main className="m-5 ">
+    <div className="flex  justify-between align-center">
+    <button className="btn-primary px-5 sm:my-5 inline my-5" onClick={()=>navigate("/addAProduct")} >Sell Your Product</button>
+     <img onClick={()=>setMenuOpen(prev => !prev)} className="inline-block align-center my-auto sm:hidden h-10" src={(menuOpen)?x:menu} alt="" /></div>
     <div style={{height:"80%", display:"block",}}>
     <MenuList/>  
-    <VerticalLine/>
-    <DisplayArea/>
+   <VerticalLine/>
+   {(!menuOpen)?
+    <DisplayArea/>:<></>}
     {(isDialogOpen||isBuyPressed) && (
         <div className="overlay">
           <div className="modal">
