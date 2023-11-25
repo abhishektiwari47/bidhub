@@ -149,21 +149,21 @@ function Home()
     
     return <div >
         <nav className="flex items-center justify-between m-5">
-            <span className="hidden  sm:flex items-center space-x-4">
+            <span className="hidden  lg:flex items-center space-x-4">
             <ProfilePhoto user={user} dimention={7}/>
             <span className="font-medium">{user.username.toString()}</span></span>
-            <span className="w-[80vw] sm:w-[40vw] border-b-2 px-4 flex m-auto" ><input className="w-[80vw] focus:outline-none" type="text" name="" id="" placeholder={searchHolder}/><img src={SearchIcon} alt="" /></span>
-            <span className="hidden sm:flex  items-center space-x-4 "><span>{user.balance.toString()} INR</span> <img onClick={()=>setActiveListItem(5)} src={AddMoneyIcon} alt="Add Money" /></span>
+            <span className="w-[80vw] lg:w-[40vw] border-b-2 px-4 flex m-auto" ><input className="w-[80vw] focus:outline-none" type="text" name="" id="" placeholder={searchHolder}/><img src={SearchIcon} alt="" /></span>
+            <span className="hidden lg:flex  items-center space-x-4 "><span>{user.balance.toString()} INR</span> <img onClick={()=>setActiveListItem(5)} src={AddMoneyIcon} alt="Add Money" /></span>
         </nav>
-    <main className="m-5 ">
+    <main className="m-5">
     <div className="flex  justify-between align-center">
-    <button className="btn-primary px-5 sm:my-5 inline my-5" onClick={()=>navigate("/addAProduct")} >Sell Your Product</button>
-     <img onClick={()=>setMenuOpen(prev => !prev)} className="inline-block align-center my-auto sm:hidden h-10" src={(menuOpen)?x:menu} alt="" /></div>
+    <button className="btn-primary px-5 lg:my-5 inline my-5" onClick={()=>navigate("/addAProduct")} >Sell Your Product</button>
+     <img onClick={()=>setMenuOpen(prev => !prev)} className="inline-block align-center my-auto lg:hidden h-10" src={(menuOpen)?x:menu} alt="" /></div>
     <div style={{height:"80%", display:"block",}}>
     <MenuList/>  
    <VerticalLine/>
-   {(!menuOpen)?
-    <DisplayArea/>:<></>}
+  
+    <DisplayArea/>
     {(isDialogOpen||isBuyPressed) && (
         <div className="overlay">
           <div className="modal">
