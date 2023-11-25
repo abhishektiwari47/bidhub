@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil"
 import { lazy } from "react";
-import { activeListItemstate } from "../../data/RelatedStates"
+import { activeListItemstate, menuState } from "../../data/RelatedStates"
 import AllProduct from "./AllProducts";
 import AllYourBid from "../buyer/AllYourBids";
 import AllYourBoughtProducts from "../buyer/YourBoughtProducts";
@@ -18,6 +18,7 @@ const {Account} = AccountComponent;
 
 export function DisplayArea(){
     const [activeListItem] = useRecoilState(activeListItemstate)
+    const [menuOpen,setMenuOpen]=useRecoilState(menuState)
     const renderPage = ()=>{
         switch(activeListItem){
             case 0:
@@ -34,10 +35,15 @@ export function DisplayArea(){
                 return <AddMoney/>
            
         }
+    
     }
+ 
+    const gridStyle= (activeListItem==0 || activeListItem==1)?"lg:inline-grid":"lg:inline-block";
+    const overflowStyle = (activeListItem==0||activeListItem==1||activeListItem==2||activeListItem==3)?"overflow-auto":"overflow-scroll lg:overflow-hidden";
+    const displayStyle =(menuOpen)?`hidden ${gridStyle} ${overflowStyle} lg:w-[80%] m-auto`:`block ${gridStyle} ${overflowStyle}  m-auto w-[100%] lg:w-[80%]`
 
     
-    return <div className="part" style={{width:"80%",display:(activeListItem==0 || activeListItem==1)?"inline-grid":"inline-block",gridTemplateColumns:"repeat(2, 1fr)",maxHeight:"70vh",overflow:(activeListItem==0||activeListItem==1||activeListItem==2||activeListItem==3)?"auto":"hidden",verticalAlign:"top", backgroundColor:"white"}}>
+    return <div className={displayStyle} style={{gridTemplateColumns:"repeat(2, 1fr)",maxHeight:"70vh",verticalAlign:"top"}}>
      {renderPage()}
    </div>
 }
