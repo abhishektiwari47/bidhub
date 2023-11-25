@@ -82,12 +82,12 @@ function ProductForSell(){
             } 
         });
 
-        return <div key={index} style={{display:"inline-grid",gridTemplateColumns:"1fr 2fr 1fr"}}>
-        <div>
+        return <div key={index} className="bg-[#EEEEEE] p-3 lg:p-0 my-4 lg:m-7 sm:inline-grid " style={{gridTemplateColumns:"2fr 3fr 2fr"}}>
+        <div  className="flex items-center justify-center my-4 h-32 lg:m-7 border-2 rounded-lg overflow-clip">
         <img src={element.image} alt="" />
         </div>
-        <div>
-            <h3>{element.name}</h3>
+        <div className="flex flex-col my-auto justify-between">
+            <p  className="font-bold mb-3">{element.name}</p>
             <p>Product Id : {element._id}</p>
            
             {element.sold===false? <p>Total Bids : {element.bids.length}</p>:<p>Buyer Id : {element.buyerId}</p>}
@@ -95,20 +95,20 @@ function ProductForSell(){
 
 
         </div>
-        <div>
-            <div>{element.sold===false?<span>Active</span>:<span>Already Sold</span>}
+        <div className="flex flex-col my-auto p-5">
+            <div className="flex justify-end space-x-7">
+              {element.sold===false?<span className="text-[green]">Active</span>:<span className="text-[red]">Already Sold</span>}
             {element.sold==false?
-            <span >
-              <img onClick={
-                
-                async ()=>{let done = await deleteProduct(element._id);if(done){let array =  [...boughtProducts]; array.splice(index,1)
+             
+              <img className="" onClick={async ()=>{let done = await deleteProduct(element._id);if(done){let array =  [...boughtProducts]; array.splice(index,1)
             ;setBoughtProducts(array)}}} src={DeleteIcon} alt="" />
-            </span>:<></>}
+            :<></>}
             </div>
-            <p>Original Price : {element.originalPrice}</p>
-            <p>Max Bid : {element.maxBid}</p>
-            <p>Min Bid : {element.minBid}</p>
-        </div>
+            <div className="text-right text-sm">
+        <p>Original Price : {element.originalPrice.toString()} INR</p>
+        <p>Max Bid : {element.maxBid.toString()} INR</p>
+        <p>Min Bid : {element.minBid.toString()} INR</p></div>
+      </div>
         </div>
        })}
     </div>
