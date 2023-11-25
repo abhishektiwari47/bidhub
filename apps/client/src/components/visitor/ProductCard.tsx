@@ -47,7 +47,7 @@ function ProductCard(allProducts:{data:Product,userId:string}){
   
     const userBidAmount = getUserBid(data.bids, userId);
     console.log(userId)
-      return <div key={data._id} className="card mx-auto mb-10 rounded-md overflow-hidden w-[80%] sm:w-[60%] lg:w-[60%]" style={{boxShadow:"0 4px 8px 0", backgroundColor:"#F0EDED",
+      return <div key={data._id} className="card mx-auto mb-10 rounded-md overflow-hidden w-[80%] sm:w-[60%] lg:w-[60%]" style={{boxShadow:"0 1px 2px 0", backgroundColor:"#F0EDED",
         }}>
       <img className="" src={data.image.toString()} alt="Avatar" style={{height:"14em",width:"30em"}}/>
       <div className="container inline-grid grid-cols-2 px-3 py-2">
@@ -55,7 +55,7 @@ function ProductCard(allProducts:{data:Product,userId:string}){
         <h6><b>{data.name.toString()}</b></h6>
         {(userId=="")?
         <div>
-       <button className="shadow-md bg-green-500 text-white px-2 border-solid border-2 border-white rounded">Buy</button>
+       <button onClick={()=>setBuyPressed(true) } className="shadow-md cursor-pointer bg-green-500 text-white px-2 border-solid border-2 border-white rounded">Buy</button>
   
 
         <button onClick={()=>{navigate(`/addBid/${data}`); setProductData(data);}} className="Bid shadow-md text-white px-2 border-solid border-2 border-[white] mx-1 rounded bg-[#FF6B00] ">Bid</button>
