@@ -10,9 +10,9 @@ function MenuList(){
         setDialogOpen(true);
       };
       
-      let menuListStyle = `part w-[80%] sm:w-[15%] m-auto hidden sm:inline-flex text-center`;
+      let menuListStyle = `part w-[80%] lg:w-[15%] m-auto hidden lg:inline-flex text-center`;
       if(menuOpen){
-        menuListStyle = `part m-auto sm:inline-flex text-center`;
+        menuListStyle = `part m-auto lg:w-[15%] lg:inline-flex text-center`;
       }
 
     const [activeListItem,setActiveListItem]=useRecoilState(activeListItemstate)
