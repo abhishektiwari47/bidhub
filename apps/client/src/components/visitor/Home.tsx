@@ -166,11 +166,12 @@ function Home()
     <DisplayArea/>
     {(isDialogOpen||isBuyPressed) && (
         <div className="overlay">
-          <div className="modal">
-            <div className="modal-content">
+          <div className="modal lg:w-[25%] m-2">
+            <div className="modal-content   font-medium">
                 {isDialogOpen?<p>Do you want to logout of Bidhub?</p>:<p>Do you want to buy this product at Max Bid Price?</p>}
+              <div className="my-4 flex justify-between">
               <span className="close" onClick={closeDialog}>Close</span>
-            {isDialogOpen?<span className="logout" onClick={logoutUser}>Logout</span>:<span className="buy" onClick={buyAProduct}>Buy</span>}
+            {isDialogOpen?<span className="logout text-red-700 " onClick={logoutUser}>Logout</span>:<span className="buy cursor-pointer text-green-700" onClick={buyAProduct}>Buy</span>}</div>
             </div>
           </div>
         </div>
