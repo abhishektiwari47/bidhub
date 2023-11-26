@@ -1,5 +1,6 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import imageLink from "../../assets/imageLink";
+
 import {productListState, userData} from "../../data/ComponentData"
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -13,6 +14,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import UserAccount from './Account';
 const {ProfilePhoto}=UserAccount;
 import SearchIcon from '../../assets/svg/SearchIcon.svg';
+import SearchIcon2 from '../../assets/svg/SearchIcon2.png';
 import menu from '../../assets/svg/menu.svg';
 import x from '../../assets/svg/x.svg';
 import DayNightToggle from 'react-day-and-night-toggle';
@@ -149,14 +151,25 @@ function Home()
 
     const searchHolder = `Hi ${user.username.toString()} , search for a here...`;
     
-    return <div >
-        <nav className="flex items-center justify-between m-5">
+    return <div className="p-1 h-[100vh] w-[100%]" style={{backgroundColor:(isDarkMode)?"#03001C":'white'}}>
+        <nav className="flex items-center justify-between m-5 ">
             <span className="hidden  lg:flex items-center space-x-4">
             <ProfilePhoto user={user} dimention={7}/>
-            <span className="font-medium">{user.username.toString()}</span></span>
-            <span className="w-[80vw] lg:w-[40vw] border-b-2 px-4 flex m-auto" ><input className="w-[80vw] focus:outline-none" type="text" name="" id="" placeholder={searchHolder}/><img src={SearchIcon} alt="" /></span>
-            <span className="hidden lg:flex  items-center space-x-4 "><span>{user.balance.toString()} INR</span> <img onClick={()=>setActiveListItem(5)} src={AddMoneyIcon} alt="Add Money" /></span>
-            <div className="flex  items-center space-x-4 mx-4"> <DayNightToggle onChange={()=>SetIsDarkMode(prev=>!prev)} checked={isDarkMode} /></div>
+              <span style={{color:(isDarkMode)?"white":"black"}} className="font-medium">{user.username.toString()}</span></span>
+              {/* This is search box */}
+            <span className="w-[70vw] lg:w-[40vw] border-b-2 px-4 flex m-auto" >
+              <input style={{backgroundColor:(isDarkMode)?"#03001C":"white",color:(isDarkMode)?"white":"black"}} className="w-[80vw] focus:outline-none" type="text" name="" id="" placeholder={searchHolder}/><img src={(isDarkMode)?SearchIcon2:SearchIcon} alt="" /></span>
+            <span style={{color:(isDarkMode)?"white":"#3F3F3F"}} className="hidden lg:flex  items-center space-x-4 "><span>{user.balance.toString()} INR</span> <img onClick={()=>setActiveListItem(5)} src={AddMoneyIcon} alt="Add Money" /></span>
+            <div className="flex  items-center space-x-4 mx-4"> <DayNightToggle onChange={()=>{
+              SetIsDarkMode(!isDarkMode);
+              if(isDarkMode){
+              localStorage.setItem('isDarkMode','false');
+            }
+              else{
+                localStorage.setItem('isDarkMode','true');
+              }
+            
+              }} checked={isDarkMode} /></div>
         </nav>
     <main className="m-5">
     <div className="flex  justify-between align-center">

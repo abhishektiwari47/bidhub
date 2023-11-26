@@ -2,6 +2,7 @@ import { useRecoilState,atom } from "recoil";
 import { userData } from "../../data/ComponentData";
 import { useState } from "react";
 import axios from "axios";
+import { isDarkModeState } from "../../data/RelatedStates";
 
 const inputAmountState = atom({
     key:"inputAmountState",
@@ -32,9 +33,10 @@ function AddMoney(){
       }
     }
 
+    const [isDarkMode]= useRecoilState(isDarkModeState)
     return <div >
-    <div className="p-5 lg:mx-10 my-2 border-solid rounded-lg border-black border-[1px]" style={{height:"100%", backgroundColor:"" ,verticalAlign:"top"}}>
-    <p className="lg:text-[30px]">Your current Bidhub wallet balance is</p>
+    <div  className="p-5 lg:mx-10 my-2 border-solid rounded-lg border-[1px]" style={{height:"100%", backgroundColor:"" ,verticalAlign:"top",borderColor:(isDarkMode)?"white":"black"}}>
+    <p style={{color:(isDarkMode)?"white":"black"}} className="lg:text-[30px]">Your current Bidhub wallet balance is</p>
     <p className="lg:text-[30px] text-[#FF6B00] font-medium">{user.balance} INR</p>
     </div>
     {/* second container */}

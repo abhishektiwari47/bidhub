@@ -3,23 +3,32 @@ import {Link,useNavigate} from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
 import BidhubDesign from '../../assets/svg/BidhubDesign.svg';
+import { useRecoilState } from 'recoil';
+import { isDarkModeState } from '../../data/RelatedStates';
 
 function Auth(){
   const [showComponentA, setShowComponentA] = useState(true);
-
+  const [isDarkMode,setIsDarkMode]=useRecoilState(isDarkModeState)
   const toggleComponent = () => {
     setShowComponentA(!showComponentA);
   };
-
-
-
+  
+  let authDivStyle='block  mx-auto sm:h-screen sm:flex sm:items-start';
+   if(isDarkMode)
+   {
+    authDivStyle=`block bg-[#03001C] mx-auto sm:h-screen sm:flex sm:items-start`;
+   }
+   console.log("this is ");
+   
+   console.log(localStorage.getItem('isDarkMode'));
+   
   return (
-    <div className='block mx-auto sm:h-screen sm:flex sm:items-start'>
+    <div className={authDivStyle}>
       <div className='block  w-2/3  h-screen mx-auto sm:inline-block sm:mx-0 '>
-        <div className="h-[0.3] py-[20%] sm:p-10 text-[35px] text-center sm:text-left">Welcome to <h1 className='text-[70px] text-[#FF6B00]'>BidHub</h1></div>
+        <div style={{color:(isDarkMode)?"white":"black"}} className="h-[0.3] py-[20%] sm:p-10 text-[35px] text-center sm:text-left">Welcome to <h1 className='text-[70px] text-[#FF6B00]'>BidHub</h1></div>
         <div><img className=' sm:block h-[50vh] mt-10 mb-10' src={BidhubDesign} alt="" /></div>
       </div>
-      <div className='border-solid m-5 sm:m-0 border-2 block lg:w-1/4 h-[80vh] sm:mt-[10vh] sm:mb-[10vh] py-2 px-10 '>
+      <div className='border-solid bg-white rounded m-5 sm:m-0 border-2 block lg:w-1/4 h-[80vh] sm:mt-[10vh] sm:mb-[10vh] py-2 px-10 '>
       {showComponentA ? <Login/> : <Signup />}
       
       <p className='font-medium text-center m-3'>{showComponentA ? "New User? " : "Existing User? "}

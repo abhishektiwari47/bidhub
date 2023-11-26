@@ -1,4 +1,23 @@
 import { atom,selector } from "recoil";
+let isDarkMode = false;
+if(localStorage.getItem('isDarkMode')==null)
+{
+  console.log("dark mode null");
+  
+   localStorage.setItem('isDarkMode','false');
+   isDarkMode = false;
+  }
+  else if(localStorage.getItem('isDarkMode')=='true')
+  {
+
+  isDarkMode = true;
+  
+}
+else{
+  console.log("this is first time"+localStorage.getItem('isDarkMode'));
+  
+  isDarkMode = false;
+}
 
 const fontSizeState = atom({
     key: 'fontSizeState',
@@ -42,6 +61,6 @@ const menuState = atom({
 })
 const isDarkModeState = atom({
   key:"isDarkModeState",
-  default:false
+  default:isDarkMode
 })
 export {fontSizeState,fontSizeLabelState,activeListItemstate,logoutState,buyState,buyProductState,cameraOpenState,menuState,isDarkModeState};

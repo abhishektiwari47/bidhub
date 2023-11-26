@@ -2,6 +2,7 @@ import { useRecoilState } from "recoil";
 import { userData } from "../../data/ComponentData";
 import Profile from '../../assets/svg/Profile.svg';
 import Link from '../../assets/svg/Link.svg';
+import Link2 from '../../assets/svg/Link2.svg';
 import Emoji1 from '../../assets/svg/AchievementsIcons/Emoji1.svg';
 import Emoji2 from '../../assets/svg/AchievementsIcons/Emoji2.svg';
 import Emoji3 from '../../assets/svg/AchievementsIcons/Emoji3.svg';
@@ -42,6 +43,7 @@ import Emoji37 from '../../assets/svg/AchievementsIcons/Emoji37.svg';
 import Emoji38 from '../../assets/svg/AchievementsIcons/Emoji38.svg';
 import Emoji39 from '../../assets/svg/AchievementsIcons/Emoji39.svg';
 import Emoji40 from '../../assets/svg/AchievementsIcons/Emoji40.svg';
+import { isDarkModeState } from "../../data/RelatedStates";
 
 const emojiArr = [
     Emoji1, Emoji2, Emoji3, Emoji4, Emoji5, Emoji6, Emoji7, Emoji8, Emoji9, Emoji10,
@@ -166,31 +168,31 @@ for (let i = 0; i < count && i < emojiArr.length; i++) {
   }
     
       
-
+  const [isDarkMode]= useRecoilState(isDarkModeState)
 
     return < div >
     <div className="block lg:inline-grid lg:h-[35vh]" style={{width:"100%",gridTemplateColumns:"1fr 2fr"}}>
     <div className="flex p-5 justify-center items-center" style={{width:"100%",}}><ProfilePhoto user={user} dimention={25}/></div>
     <div className="p-5 flex flex-col text-center lg:text-left justify-between" style={{width:"100%"}}>
         <div><h1 className="text-[#6363FF]  text-[30px]">{user.fullName}</h1>
-        <h4  className="text-[#3F3F3F] italic  text-[22px]">{user.username}</h4>
-        <h4 className="text-[#3F3F3F]  text-[22px]">{user.userId}</h4></div>
+        <h4 style={{color:(isDarkMode)?"gray":"#3F3F3F"}} className="italic  text-[22px]">{user.username}</h4>
+        <h4 style={{color:(isDarkMode)?"gray":"#3F3F3F"}} className="text-[22px]">{user.userId}</h4></div>
         <div>{/* <h4>{user.userId}</h4> */}
-        <h4 className="  text-[22px]">Hostel : {user.hostelName}</h4>
-        <h4 className=" text-[22px]">Room : {user.hostelRoom}</h4></div>
+        <h4 style={{color:(isDarkMode)?"white":"black"}} className="  text-[22px]">Hostel : {user.hostelName}</h4>
+        <h4 style={{color:(isDarkMode)?"white":"black"}} className=" text-[22px]">Room : {user.hostelRoom}</h4></div>
     </div>
     </div>
     <hr style={{margin:"0px" }} />
     <div className="lg:inline-grid" style={{width:"100%", height:"44vh",gridTemplateColumns:"95fr 1fr 95fr"}}>
-    <div className="p-5" style={{width:"100%"}}><div className="text-[22px]">Bought Product Ids</div>
-    <div style={{height:"25vh",marginTop:"10px",overflow:"auto"}}>{user.productId.map((element)=>
+    <div className="p-5" style={{width:"100%"}}><div style={{color:(isDarkMode)?"white":"black"}}  className="text-[22px]">Bought Product Ids</div>
+    <div style={{height:"25vh",marginTop:"10px",overflow:"auto",color:(isDarkMode)?"white":"black"}}>{user.productId.map((element)=>
     {
-        return <div onClick={()=>{}} className="text-[20px] cursor-pointer  font-medium p-1"><img className="inline" src={Link} alt="" /> {element}</div>
+        return <div onClick={()=>{}} className="text-[20px] cursor-pointer  font-medium p-1"><img className="inline" src={(isDarkMode)?Link2:Link} alt="" /> {element}</div>
     })}</div>
     </div>
     <div className="lg:h-[100%] my-6 bg-[#a9a9a9] "  style={{width:"10%"}}></div>
     <div  className="p-5" style={{width:"100%"}}>
-        <div className="text-[22px]">
+        <div style={{color:(isDarkMode)?"white":"black"}} className="text-[22px]">
         Achievement
         </div>
         <div style={{height:"25vh",marginTop:"10px",overflow:"auto"}}>

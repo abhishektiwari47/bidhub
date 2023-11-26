@@ -40,10 +40,11 @@ export function DisplayArea(){
  
     const gridStyle= (activeListItem==0 || activeListItem==1)?"lg:inline-grid":"lg:inline-block";
     const overflowStyle = (activeListItem==0||activeListItem==1||activeListItem==2||activeListItem==3)?"overflow-auto":"overflow-scroll lg:overflow-hidden";
-    const displayStyle =(menuOpen)?`hidden ${gridStyle} ${overflowStyle} lg:w-[80%] m-auto`:`block ${gridStyle} ${overflowStyle}  m-auto w-[100%] lg:w-[80%]`
+    
+    const displayStyle =(menuOpen)?`hidden ${gridStyle} ${overflowStyle} lg:w-[80%] m-auto lg:max-h-[70vh] max-h-[80vh]`:`block ${gridStyle} ${overflowStyle}  m-auto w-[100%] lg:w-[80%] lg:max-h-[70vh] max-h-[80vh]`
 
     
-    return <div className={displayStyle} style={{gridTemplateColumns:"repeat(2, 1fr)",maxHeight:"70vh",verticalAlign:"top"}}>
+    return <div className={displayStyle} style={{gridTemplateColumns:"repeat(2, 1fr)",verticalAlign:"top"}}>
      {renderPage()}
    </div>
 }

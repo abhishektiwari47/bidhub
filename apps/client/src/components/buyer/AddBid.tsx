@@ -6,6 +6,7 @@ import { constSelector, useRecoilState } from "recoil";
 import { singleProductDataState, userData } from "../../data/ComponentData";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { isDarkModeState } from "../../data/RelatedStates";
 
 interface Bid {
     amount: number,
@@ -86,7 +87,7 @@ function AddBid(){
     }, [productData.sellerId, authentication]); 
     
     const navigate = useNavigate();
-
+    const [isDarkMode]= useRecoilState(isDarkModeState)
     return <>
     {/* nav */}
     <nav><img className="h-6 mx-6 my-6"  src={BackButton} onClick={() => navigate(-1)} alt="" /></nav>
