@@ -4,7 +4,7 @@ import {productListState, userData} from "../../data/ComponentData"
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AddMoneyIcon from '../../assets/svg/AddMoneyIcon.svg';
-import {  activeListItemstate, buyProductState, buyState, logoutState, menuState } from "../../data/RelatedStates";
+import {  activeListItemstate, buyProductState, buyState, isDarkModeState, logoutState, menuState } from "../../data/RelatedStates";
 import MenuList from "./MenuList";
 import { VerticalLine } from "../common";
 import { DisplayArea } from "./Display";
@@ -15,13 +15,15 @@ const {ProfilePhoto}=UserAccount;
 import SearchIcon from '../../assets/svg/SearchIcon.svg';
 import menu from '../../assets/svg/menu.svg';
 import x from '../../assets/svg/x.svg';
-
+import DayNightToggle from 'react-day-and-night-toggle';
 
 function Home()
 {
     const [user,setUser] = useRecoilState(userData)
     const [isDialogOpen, setDialogOpen] = useRecoilState(logoutState);
     const [isBuyPressed, setBuyPressed] = useRecoilState(buyState);
+    
+    const [isDarkMode,SetIsDarkMode] = useRecoilState(isDarkModeState)
     const navigate = useNavigate();
     //This will close the opened Dialog box of logout...
     const closeDialog = () => {
@@ -154,6 +156,7 @@ function Home()
             <span className="font-medium">{user.username.toString()}</span></span>
             <span className="w-[80vw] lg:w-[40vw] border-b-2 px-4 flex m-auto" ><input className="w-[80vw] focus:outline-none" type="text" name="" id="" placeholder={searchHolder}/><img src={SearchIcon} alt="" /></span>
             <span className="hidden lg:flex  items-center space-x-4 "><span>{user.balance.toString()} INR</span> <img onClick={()=>setActiveListItem(5)} src={AddMoneyIcon} alt="Add Money" /></span>
+            <div className="flex  items-center space-x-4 mx-4"> <DayNightToggle onChange={()=>SetIsDarkMode(prev=>!prev)} checked={isDarkMode} /></div>
         </nav>
     <main className="m-5">
     <div className="flex  justify-between align-center">

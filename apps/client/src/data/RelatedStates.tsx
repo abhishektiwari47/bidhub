@@ -40,4 +40,8 @@ const menuState = atom({
   default:false
 
 })
-export {fontSizeState,fontSizeLabelState,activeListItemstate,logoutState,buyState,buyProductState,cameraOpenState,menuState};
+const isDarkModeState = atom({
+  key:"isDarkModeState",
+  default:false
+})
+export {fontSizeState,fontSizeLabelState,activeListItemstate,logoutState,buyState,buyProductState,cameraOpenState,menuState,isDarkModeState};
