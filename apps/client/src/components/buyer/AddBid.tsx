@@ -68,6 +68,39 @@ function AddBid(){
       
     }
 
+    console.log(authentication);
+    
+      let highestBid = 0;
+      let highestBiddingUser:string="";
+      productData.bids.forEach((bid)=>{
+          if(bid.amount>highestBid)
+          {
+             highestBid = bid.amount;
+             highestBiddingUser = bid.userId.toString();
+          } 
+      })
+
+    let body:object;
+    if(highestBiddingUser!="")
+    {
+      body={userId:highestBiddingUser}
+    }
+    
+    async function sellAtMaxBid(){
+        console.log(highestBiddingUser+highestBid);
+        
+       const response = await axios.post(`http://localhost:4242/general/acceptABid/${productData._id}`,body,{
+        headers: {
+          Authorization: authentication,
+        },
+       });
+       if(response.status==200)
+       {
+         console.log("sold");
+         
+       }
+
+    }
     
     
     useEffect(() => {
@@ -125,11 +158,15 @@ function AddBid(){
                 ))}
             </div>
       </div>
+      
 
       {/* Here  */}
+      {(user.userId!=productData.sellerId)?
       <div className="flex text-center justify-center items-center space-x-5 m-2" ><span className="text-green-700 font-medium">INR</span> <input className="input1 px-2 w-[60%]" type="number" onChange={(e)=>{setBidValue(Number(e.target.value));}}/>
        <button className="btn-primary px-5 shadow-md shadow-gray" onClick={()=>bid()}>Bid</button>
-      </div> 
+      </div> :<div className="flex text-center justify-center items-center space-x-5 m-2" >
+        <button className="btn-primary px-5 shadow-md shadow-gray" onClick={()=>{sellAtMaxBid();}}>Sell At Highest Bid </button>
+      </div>}
 
 
        </div>
