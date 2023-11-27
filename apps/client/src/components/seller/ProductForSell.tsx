@@ -2,24 +2,30 @@ import axios, { all } from "axios";
 import mongoose from "mongoose";
 import { useEffect, useState } from "react";
 import DeleteIcon from '../../assets/svg/DeleteIcon.svg';
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { singleProductDataState } from "../../data/ComponentData";
 
-type Bid = {
-    amount:number,
-}
+interface Bid {
+    amount: number,
+    userId: mongoose.Types.ObjectId,
+     
+    
+  }
 
-type Product = {
-    image:string,
-    name:string,
-    _id: string,
-    sellerId:string,
-    sold:boolean,
-    sellPrice:number,
-    bids:Bid[],
-    originalPrice:number,
-    maxBid:number,
-    minBid:number,
-    buyerId:string
- 
+interface Product {
+  _id: string;
+  name: string;
+  description: string;
+  originalPrice: number;
+  image: string;
+  maxBid: { type: number; required: true };
+  minBid: { type: number; required: true };
+  sold: boolean;
+  sellPrice: number;
+  sellerId: string;
+  buyerId: string;
+  bids: Bid[];
 }
 
 function ProductForSell(){
@@ -53,7 +59,10 @@ function ProductForSell(){
       });
       if(response.status==200)
       {
+        console.log(response.data);
+        
         return response.data
+
       }
       else {
         console.log(response.status);
@@ -61,6 +70,8 @@ function ProductForSell(){
       }
       
     }
+    
+    const [productData,setProductData]= useRecoilState(singleProductDataState);
     useEffect(()=>{
         const fetchData = async ()=>{
          const response = await allYourBroughtProducts();
@@ -70,8 +81,8 @@ function ProductForSell(){
          }
         } 
         fetchData();
-    },[]);
-    
+    },[productData]);
+    const navigate = useNavigate();
     return <div >
        {boughtProducts.map((element:Product,index:number)=>{
         let highestBid = 0;
@@ -81,8 +92,10 @@ function ProductForSell(){
                highestBid = bid.amount;
             } 
         });
-
-        return <div key={index} className="bg-[#EEEEEE] p-3 lg:p-0 my-4 lg:m-7 sm:inline-grid " style={{gridTemplateColumns:"2fr 3fr 2fr"}}>
+        return <div onClick={()=>{
+          console.log(element);
+          
+          navigate(`/addBid/${element}`);setProductData(element)}} key={index} className="bg-[#EEEEEE] p-3 lg:p-0 my-4 lg:m-7 sm:inline-grid " style={{gridTemplateColumns:"2fr 3fr 2fr"}}>
         <div  className="flex items-center justify-center my-4 h-32 lg:m-7 border-2 rounded-lg overflow-clip">
         <img src={element.image} alt="" />
         </div>
