@@ -1,5 +1,6 @@
 import { useParams ,useNavigate} from "react-router-dom";
 import BackButton from "../../assets/svg/BackButton.svg";
+import BackButton2 from "../../assets/svg/BackButton2.svg";
 import BidButton from '../../assets/svg/BidButton.svg';
 import mongoose from "mongoose";
 import { constSelector, useRecoilState } from "recoil";
@@ -33,7 +34,8 @@ interface User {
 }
 
 function AddBid(){
-   
+     const [isDarkMode] = useRecoilState(isDarkModeState)
+     
     const { id } = useParams<{ id: string }>();
     const [user] = useRecoilState(userData);
     const [seller,setSeller] = useState<User>({
@@ -55,14 +57,11 @@ function AddBid(){
           Authorization: authentication,
         },
       })
-      console.log("hmm")
-      console.log(response.data);
+      
       
       if(response.status===200)
       {
         
-        console.log("done")
-        console.log(response.data.bids);
         setProductData(response.data)
         
       }
@@ -70,7 +69,7 @@ function AddBid(){
     }
 
     
-
+    
     useEffect(() => {
       async function getSellerId() {
         const response = await axios.get(`http://localhost:4242/auth/getSeller/${productData.sellerId}`, {
@@ -82,18 +81,25 @@ function AddBid(){
         setSeller(response.data);
       }
     
-  
-      getSellerId();
-    }, [productData.sellerId, authentication]); 
+      if(productData.sellerId)
+      {
+        getSellerId();
+      }
+     
+    }, []);
+    console.log("this is user");
+     
+    console.log(user);
+     console.log("this is product");
+     console.log(productData);
+     
     
     const navigate = useNavigate();
-    const [isDarkMode]= useRecoilState(isDarkModeState)
-    return <>
-    {/* nav */}
-    <nav><img className="h-6 mx-6 my-6"  src={BackButton} onClick={() => navigate(-1)} alt="" /></nav>
-    
 
-     <div className=" px-20 py-2 lg:flex lg:space-x-32 space-y-5 lg:space-y-0" style={{ gridTemplateColumns:"1fr 1fr",width:"100%"}}>
+    return <div className="p-1 h-screen" style={{backgroundColor:(isDarkMode)?"#03001C":"white"}}>
+    {/* nav */}
+    <nav><img className="h-6 mx-6 my-6"  src={(isDarkMode)?BackButton2:BackButton} onClick={() => navigate(-1)} alt="" /></nav>
+    <div className=" px-20 py-2 lg:flex lg:space-x-32 space-y-5 lg:space-y-0" style={{ gridTemplateColumns:"1fr 1fr",width:"100%"}}>
 
    <div className="bg-white m-auto shadow-md shadow-gray-800 " style={{height:"85vh", width:"75%" }}>
      <div className="text-center bg-[#FF6B00] text-white py-2" style={{display:"inline-grid", gridTemplateColumns:"1fr 1fr",width:"100%"}}><div>UserId</div><div>Bid(INR)</div></div>
@@ -133,27 +139,28 @@ function AddBid(){
          <div  style={{width:"100%"}}>
             <img   className="m-auto h-[40vh] w-[100%] rounded-md" src={productData.image} alt="" />
          </div>
-         <div style={{width:"100%",height:"30vh"}}>
+         <div style={{width:"100%",height:"30vh",color:(isDarkMode)?"white":"black"}}>
            <div className="my-2"  style={{display:"inline-grid" , gridTemplateColumns:"1fr 1fr",width:"100%",}} >
-            <p className='font-medium text-[20px]'>{productData.name}</p>{(productData.sold)?<p className='font-medium text-red-600 text-[15px] text-right'>Already Sold</p>:<p className='font-medium text-[15px] text-right text-green-600'>Available</p>}</div>
+            <p style={{color:(isDarkMode)?"white":"black"}} className='font-medium text-[20px]'>{productData.name}</p>{(productData.sold)?<p  className='font-medium text-red-600 text-[15px] text-right'>Already Sold</p>:<p className='font-medium text-[15px] text-right text-green-600'>Available</p>}</div>
            <div>
-            <h6 className="my-2">
+            <h6  className="my-2">
                 {productData.description}
             </h6>
             <h6 className="my-1">Original Price : {productData.originalPrice} INR</h6>
             <div className="my-1" style={{display:"inline-grid" , gridTemplateColumns:"1fr 1fr",width:"100%",}}><h6>Max Bid : {productData.maxBid.toString()}</h6><h6 className="text-right">Min Bid : {productData.minBid.toString()}</h6></div>
-            <div>
+           { (productData.sellerId!=undefined || productData.sellerId==null)?<><div>
               <h6 className="my-1">Seller Id : {productData.sellerId}</h6></div>
             <div className="my-1"><h6>Seller Name : {seller.fullName}</h6></div>
             <div className="my-1"><h6>Seller Name : {seller.hostelName}</h6></div>
             <div className="my-1"><h6>Seller Name : {seller.hostelRoom}</h6></div>
 
+           </>:<></>}
            </div>
 
          </div>
        </div>
      </div>
-    </>
+    </div>
 }
 
 export default AddBid;
