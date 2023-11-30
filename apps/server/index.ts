@@ -17,7 +17,7 @@ app.use("/pay", express.json(), paymentRoutes);
 app.use("/event",eventRoutes)
 app.use("/bid",express.json(),bidRoutes);
 app.get("/done",(req,res)=>{
-    res.json({"message":"this is done now 3"})
+    res.json({"message":"this is done now 4"})
 });
 
 app.listen(3000,"0.0.0.0", () => {
