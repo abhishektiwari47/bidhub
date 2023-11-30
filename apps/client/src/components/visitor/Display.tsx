@@ -1,5 +1,4 @@
 import { useRecoilState } from "recoil"
-import { lazy } from "react";
 import { activeListItemstate, menuState } from "../../data/RelatedStates"
 import AllProduct from "./AllProducts";
 import AllYourBid from "../buyer/AllYourBids";
@@ -18,7 +17,7 @@ const {Account} = AccountComponent;
 
 export function DisplayArea(){
     const [activeListItem] = useRecoilState(activeListItemstate)
-    const [menuOpen,setMenuOpen]=useRecoilState(menuState)
+    const [menuOpen]=useRecoilState(menuState)
     const renderPage = ()=>{
         switch(activeListItem){
             case 0:

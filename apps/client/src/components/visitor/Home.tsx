@@ -1,16 +1,14 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import imageLink from "../../assets/imageLink";
-
+import { useRecoilState } from "recoil";
 import {productListState, userData} from "../../data/ComponentData"
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import AddMoneyIcon from '../../assets/svg/AddMoneyIcon.svg';
 import {  activeListItemstate, buyProductState, buyState, isDarkModeState, logoutState, menuState } from "../../data/RelatedStates";
 import MenuList from "./MenuList";
 import { VerticalLine } from "../common";
 import { DisplayArea } from "./Display";
 import mongoose from "mongoose";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UserAccount from './Account';
 const {ProfilePhoto}=UserAccount;
 import SearchIcon from '../../assets/svg/SearchIcon.svg';
@@ -78,7 +76,7 @@ function Home()
     const [productList,setProductList]=useRecoilState(productListState)
     const [menuOpen,setMenuOpen] = useRecoilState(menuState)
     
-    const [productId,setProductId] = useRecoilState(buyProductState)
+    const [productId] = useRecoilState(buyProductState)
     async function buyAProduct()
     {
       const authorization = "bearer "+localStorage.getItem('token');
@@ -148,7 +146,8 @@ function Home()
     },[])
 
     const [activeListItem,setActiveListItem] = useRecoilState(activeListItemstate)
-
+    console.log(activeListItem);
+    
     const searchHolder = `Hi ${user.username.toString()} , search for a here...`;
     
     return <div className="p-1 h-[100vh] w-[100%]" style={{backgroundColor:(isDarkMode)?"#03001C":'white'}}>
@@ -198,20 +197,20 @@ function Home()
     </main>
     </div>
 }
-type userType = {
-  userId: string;
-  username: string;
-  password: string;
-  balance: number;
-  fullName: string;
-  hostelName: string;
-  hostelRoom: string;
-  imageLink: string;
-  productId: never[];}
+// type userType = {
+//   userId: string;
+//   username: string;
+//   password: string;
+//   balance: number;
+//   fullName: string;
+//   hostelName: string;
+//   hostelRoom: string;
+//   imageLink: string;
+//   productId: never[];}
 
-type propsType = {
-  user:userType;
-  dimention:number;
-}
+// type propsType = {
+//   user:userType;
+//   dimention:number;
+// }
 
 export default Home;

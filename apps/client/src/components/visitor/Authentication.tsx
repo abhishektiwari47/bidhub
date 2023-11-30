@@ -1,6 +1,6 @@
 
-import {Link,useNavigate} from 'react-router-dom';
-import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
+import { useState } from 'react';
 import axios from 'axios';
 import BidhubDesign from '../../assets/svg/BidhubDesign.svg';
 import { useRecoilState } from 'recoil';
@@ -8,7 +8,7 @@ import { isDarkModeState } from '../../data/RelatedStates';
 
 function Auth(){
   const [showComponentA, setShowComponentA] = useState(true);
-  const [isDarkMode,setIsDarkMode]=useRecoilState(isDarkModeState)
+  const [isDarkMode]=useRecoilState(isDarkModeState)
   const toggleComponent = () => {
     setShowComponentA(!showComponentA);
   };

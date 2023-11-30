@@ -2,9 +2,7 @@ import axios from "axios";
 import {useEffect} from 'react';
 import { productListState, userData } from "../../data/ComponentData";
 import { useRecoilState } from "recoil";
-import mongoose from "mongoose";
 import ProductCard from "./ProductCard";
-import { buyState } from "../../data/RelatedStates";
 
 
 

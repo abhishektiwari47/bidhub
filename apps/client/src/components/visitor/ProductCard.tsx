@@ -1,8 +1,8 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import { useRecoilState } from "recoil";
-import { buyProductState, buyState } from "../../data/RelatedStates";
-import axios from "axios";
-import { productListState,singleProductDataState, userData } from "../../data/ComponentData";
+import {  buyState } from "../../data/RelatedStates";
+
+import { singleProductDataState } from "../../data/ComponentData";
 import { useNavigate } from "react-router-dom";
 
 interface Bid {
@@ -29,11 +29,14 @@ interface Bid {
 
 function ProductCard(allProducts:{data:Product,userId:string}){
   const navigate = useNavigate();
-  const [user,setUser] = useRecoilState(userData)
+  // const [user,setUser] = useRecoilState(userData)
   const [isBuyPressed, setBuyPressed] = useRecoilState(buyState);
-  const [productId,setProductId] = useRecoilState(buyProductState);
+  console.log(isBuyPressed);
+  
+  // const [productId,setProductId] = useRecoilState(buyProductState);
     const {data,userId} = allProducts
     const [productData,setProductData] = useRecoilState(singleProductDataState);
+   console.log(productData);
    
     function getUserBid(productBid:Bid[], userId:string) {
       if (userId === "") {

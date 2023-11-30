@@ -1,40 +1,20 @@
-import { useParams ,useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import BackButton from "../../assets/svg/BackButton.svg";
 import BackButton2 from "../../assets/svg/BackButton2.svg";
-import BidButton from '../../assets/svg/BidButton.svg';
-import mongoose from "mongoose";
-import { constSelector, useRecoilState } from "recoil";
-import { imageState, singleProductDataState, userData } from "../../data/ComponentData";
+// import mongoose from "mongoose";
+import { useRecoilState } from "recoil";
+import { imageState } from "../../data/ComponentData";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {activeListItemstate, cameraOpenState, isDarkModeState} from '../../data/RelatedStates';
+import {activeListItemstate, isDarkModeState} from '../../data/RelatedStates';
 import Folder from '../../assets/svg/Folder.svg';
 import Camera from '../../assets/svg/Camera.svg';
 
 
-interface Bid {
-    amount: number,
-    userId: mongoose.Types.ObjectId,
-}
-interface Product {
-    _id:string;
-    name: string;
-    description: string;
-    originalPrice: number;
-    image: string;
-    maxBid: { type: number; required: true };
-    minBid: { type: number; required: true };
-    sold: boolean;
-    sellPrice: number;
-    sellerId: string;
-    buyerId: string;
-    bids: Bid[];
-  }
-interface User {
-   fullName:string,
-    hostelName:string,
-    hostelRoom:string,   
-}
+// interface Bid {
+//     amount: number,
+//     userId: mongoose.Types.ObjectId,
+// }
 
 function AddProduct(){
    
@@ -93,6 +73,8 @@ const videoConstraints = {
 
 const CameraView = () => {
   const [image,setImage]=useRecoilState(imageState)
+console.log(image);
+  
   const [picture, setPicture] = useState<string | null>(null);
   const webcamRef = React.useRef<Webcam>(null);
 
@@ -197,6 +179,8 @@ const CameraView = () => {
 
 const AddProductCard= ()=>{
   const [activeListItem,setActiveListItem]=useRecoilState(activeListItemstate);
+  console.log(activeListItem);
+  
   const [name,setName]=useState('');
   const [description,setDescription]=useState('');
   const [originalPrice,setOriginalPrice]=useState(0);
@@ -236,7 +220,7 @@ const AddProductCard= ()=>{
           alert("invalid credentials");
       }
   };
-  const [isDarkMode]= useRecoilState(isDarkModeState)
+  // const [isDarkMode]= useRecoilState(isDarkModeState)
 
   return <div   className="bg-white border-[1px] px-10 py-3 rounded border-[#8D8D8D]">
     <h2 className="text-center text-[22px] ">Product Details</h2>

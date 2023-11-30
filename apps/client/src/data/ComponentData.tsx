@@ -1,4 +1,4 @@
-import { atom,selector } from "recoil";
+import { atom } from "recoil";
 import mongoose from 'mongoose';
 
  const userData = atom({

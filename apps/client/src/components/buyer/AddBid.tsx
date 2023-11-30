@@ -1,32 +1,30 @@
-import { useParams ,useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import BackButton from "../../assets/svg/BackButton.svg";
 import BackButton2 from "../../assets/svg/BackButton2.svg";
-import BidButton from '../../assets/svg/BidButton.svg';
-import mongoose from "mongoose";
-import { constSelector, useRecoilState } from "recoil";
+import {  useRecoilState } from "recoil";
 import { singleProductDataState, userData } from "../../data/ComponentData";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { isDarkModeState } from "../../data/RelatedStates";
 
-interface Bid {
-    amount: number,
-    userId: mongoose.Types.ObjectId,
-}
-interface Product {
-    _id:string;
-    name: string;
-    description: string;
-    originalPrice: number;
-    image: string;
-    maxBid: { type: number; required: true };
-    minBid: { type: number; required: true };
-    sold: boolean;
-    sellPrice: number;
-    sellerId: string;
-    buyerId: string;
-    bids: Bid[];
-  }
+// interface Bid {
+//     amount: number,
+//     userId: mongoose.Types.ObjectId,
+// }
+// interface Product {
+//     _id:string;
+//     name: string;
+//     description: string;
+//     originalPrice: number;
+//     image: string;
+//     maxBid: { type: number; required: true };
+//     minBid: { type: number; required: true };
+//     sold: boolean;
+//     sellPrice: number;
+//     sellerId: string;
+//     buyerId: string;
+//     bids: Bid[];
+//   }
 interface User {
    fullName:string,
     hostelName:string,
@@ -36,7 +34,7 @@ interface User {
 function AddBid(){
      const [isDarkMode] = useRecoilState(isDarkModeState)
      
-    const { id } = useParams<{ id: string }>();
+    // const { id } = useParams<{ id: string }>();
     const [user] = useRecoilState(userData);
     const [seller,setSeller] = useState<User>({
       fullName:"",

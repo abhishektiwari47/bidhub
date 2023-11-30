@@ -1,5 +1,4 @@
-import axios, { all } from "axios";
-import mongoose from "mongoose";
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 type Product = {

@@ -1,4 +1,4 @@
-import axios, { all } from "axios";
+import axios from "axios";
 import mongoose from "mongoose";
 import { useEffect, useState } from "react";
 import DeleteIcon from '../../assets/svg/DeleteIcon.svg';
@@ -35,6 +35,8 @@ function ProductForSell(){
      {
       console.log(id)
         let obj = new mongoose.Types.ObjectId(id)
+        console.log(obj);
+        
         const response = await axios.delete(`http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/general/product/sold/${id}`,{
          
           headers:{

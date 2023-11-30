@@ -74,7 +74,7 @@ function ProfilePhoto(props:propsType){
  }
 
 function Account(){
-    const [user,setUser] = useRecoilState(userData)
+    const [user] = useRecoilState(userData)
     let renderEmoji:string[]=[];
     let count =0;
    

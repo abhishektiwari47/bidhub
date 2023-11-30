@@ -1,6 +1,5 @@
 import { useRecoilState,atom } from "recoil";
 import { userData } from "../../data/ComponentData";
-import { useState } from "react";
 import axios from "axios";
 import { isDarkModeState } from "../../data/RelatedStates";
 

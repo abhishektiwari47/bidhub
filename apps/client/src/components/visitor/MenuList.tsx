@@ -1,10 +1,12 @@
 import { useRecoilState } from "recoil"
 import { activeListItemstate, isDarkModeState, logoutState, menuState } from "../../data/RelatedStates"
-import { VerticalLine } from "../common"
-import { useState } from "react";
+// import { VerticalLine } from "../common"
+// import { useState } from "react";
 
 function MenuList(){
     const [isDialogOpen, setDialogOpen] = useRecoilState(logoutState);
+    console.log(isDialogOpen);
+    
     const [menuOpen,setMenuOpen] = useRecoilState(menuState)
     const openDialog = () => {
         setDialogOpen(true);

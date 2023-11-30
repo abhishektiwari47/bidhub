@@ -1,6 +1,4 @@
-import { useEffect, useState , lazy,Suspense } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, lazy } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 const Auth = lazy(() => import('./components/visitor/Authentication'));
