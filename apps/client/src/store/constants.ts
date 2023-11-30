@@ -1,1 +1,1 @@
-const base_url = "http://localhost:4242";
+const base_url = "https://bidhub.netlify.app/api";

@@ -94,7 +94,7 @@ const Login = () => {
       //     body: JSON.stringify({ username, password })
       // });
 
-      const response = await axios.post("https://bidhub.netlify.app/api/auth/signup", body,);
+      const response = await axios.post(`${base_url}/auth/signup`, body,);
       // Todo: Create a type for the response that you get back from the server
       console.log(response.status);
 
