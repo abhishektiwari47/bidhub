@@ -15,7 +15,7 @@ function AllYourBoughtProducts(){
      const [boughtProducts,setBoughtProducts] = useState([])
      const authentication = "bearer "+localStorage.getItem('token');
     async function allYourBroughtProducts(){
-      const response = await axios.get("http://localhost:4242/general/yourBoughtProducts",{
+      const response = await axios.get("http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/general/yourBoughtProducts",{
         headers:{
             Authorization:authentication
         }

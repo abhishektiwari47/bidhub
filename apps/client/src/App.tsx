@@ -44,7 +44,7 @@ function InitState() {
   const init = async () => {
       const token = localStorage.getItem("token");
       try {
-          const response = await fetch('http://localhost:4242/auth/me', {
+          const response = await fetch('http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/auth/me', {
               headers: { Authorization: `Bearer ${token}` }
           });
           const data = await response.json();

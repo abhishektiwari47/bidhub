@@ -18,7 +18,7 @@ function AddMoney(){
     }
     const authorization = "bearer "+localStorage.getItem('token');
     const pay= async ()=>{
-      const response =   await axios.post("http://localhost:4242/pay/create-checkout-session",body,{
+      const response =   await axios.post("http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/pay/create-checkout-session",body,{
         headers:{
             Authorization:authorization
         }

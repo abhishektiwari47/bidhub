@@ -52,7 +52,7 @@ function AddBid(){
       const body = {
         amount:bidValue
       }
-      const response = await axios.put(`http://localhost:4242/bid/addBid/${productData._id}`,body,{
+      const response = await axios.put(`http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/bid/addBid/${productData._id}`,body,{
         headers: {
           Authorization: authentication,
         },
@@ -89,7 +89,7 @@ function AddBid(){
     async function sellAtMaxBid(){
         console.log(highestBiddingUser+highestBid);
         
-       const response = await axios.post(`http://localhost:4242/general/acceptABid/${productData._id}`,body,{
+       const response = await axios.post(`http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/general/acceptABid/${productData._id}`,body,{
         headers: {
           Authorization: authentication,
         },
@@ -105,7 +105,7 @@ function AddBid(){
     
     useEffect(() => {
       async function getSellerId() {
-        const response = await axios.get(`http://localhost:4242/auth/getSeller/${productData.sellerId}`, {
+        const response = await axios.get(`http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/auth/getSeller/${productData.sellerId}`, {
           headers: {
             Authorization: authentication,
           },
