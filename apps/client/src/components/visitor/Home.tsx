@@ -157,9 +157,11 @@ function Home()
             <ProfilePhoto user={user} dimention={7}/>
               <span style={{color:(isDarkMode)?"white":"black"}} className="font-medium">{user.username.toString()}</span></span>
               {/* This is search box */}
-            <span className="w-[70vw] lg:w-[40vw] border-b-2 px-4 flex m-auto" >
+            
+            <span className="w-[70vw] hidden lg:w-[40vw]  border-b-2 px-4 flex m-auto" >
               <input style={{backgroundColor:(isDarkMode)?"#03001C":"white",color:(isDarkMode)?"white":"black"}} className="w-[80vw] focus:outline-none" type="text" name="" id="" placeholder={searchHolder}/><img src={(isDarkMode)?SearchIcon2:SearchIcon} alt="" /></span>
-            <span style={{color:(isDarkMode)?"white":"#3F3F3F"}} className="hidden lg:flex  items-center space-x-4 "><span>{user.balance.toString()} INR</span> <img onClick={()=>setActiveListItem(5)} src={AddMoneyIcon} alt="Add Money" /></span>
+            <span style={{color:(isDarkMode)?"white":"#3F3F3F"}} className="hidden lg:flex  items-center space-x-4 "><span><span className="text-gray-400">Balance :</span> {user.balance.toString()} INR</span> <img onClick={()=>setActiveListItem(5)} src={AddMoneyIcon} alt="Add Money" /></span>
+
             <div className="flex  items-center space-x-4 mx-4"> <DayNightToggle onChange={()=>{
               SetIsDarkMode(!isDarkMode);
               if(isDarkMode){
