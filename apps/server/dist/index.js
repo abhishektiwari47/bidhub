@@ -19,7 +19,10 @@ app.use("/general", express_1.default.json(), activities_1.default);
 app.use("/pay", express_1.default.json(), createCheckoutSession_1.default);
 app.use("/event", webhook_1.default);
 app.use("/bid", express_1.default.json(), bid_1.default);
-app.listen(constants_1.port, () => {
+app.get("/jj", (req, res) => {
+    res.json({ "message": "this is fuck" });
+});
+app.listen(3000, "0.0.0.0", () => {
     console.log(`Example app listening at http://localhost:${constants_1.port}`);
 });
 mongoose_1.default.connect(constants_1.connectionString, { dbName: "bidhub" }).then(() => {

@@ -16,8 +16,11 @@ app.use("/general", express.json(), generalRoutes);
 app.use("/pay", express.json(), paymentRoutes);
 app.use("/event",eventRoutes)
 app.use("/bid",express.json(),bidRoutes);
+app.get("/jj",(req,res)=>{
+    res.json({"message":"this is fuck"})
+});
 
-app.listen(port, () => {
+app.listen(3000,"0.0.0.0", () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
 
