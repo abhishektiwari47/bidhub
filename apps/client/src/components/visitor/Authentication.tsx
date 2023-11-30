@@ -44,7 +44,7 @@ const Login = () => {
   const navigate = useNavigate();
   let body = { username, password };
   const handleLogin = async () => {
-      const response = await axios.post("http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/auth/login", body);
+      const response = await axios.post("https://bidhub.netlify.app/api/auth/login", body);
       // Todo: Create a type for the response that you get back from the server
       console.log(response.data);
       
@@ -94,7 +94,7 @@ const Login = () => {
       //     body: JSON.stringify({ username, password })
       // });
 
-      const response = await axios.post("http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/auth/signup", body,);
+      const response = await axios.post("https://bidhub.netlify.app/api/auth/signup", body,);
       // Todo: Create a type for the response that you get back from the server
       console.log(response.status);
 
