@@ -203,7 +203,7 @@ const AddProductCard= ()=>{
       console.log(authorization);
       console.log(body);
       
-      const response = await axios.post("http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/general/addProduct", body,{
+      const response = await axios.post(`${base_url}/general/addProduct`, body,{
         headers:{
           Authorization:authorization
         }

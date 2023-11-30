@@ -37,7 +37,7 @@ function ProductForSell(){
         let obj = new mongoose.Types.ObjectId(id)
         console.log(obj);
         
-        const response = await axios.delete(`http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/general/product/sold/${id}`,{
+        const response = await axios.delete(`${base_url}/general/product/sold/${id}`,{
          
           headers:{
               Authorization:authentication
@@ -54,7 +54,7 @@ function ProductForSell(){
     async function allYourBroughtProducts(){
       console.log("called");
       
-      const response = await axios.get("http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/general/yourProductsForSell",{
+      const response = await axios.get(`${base_url}/general/yourProductsForSell`,{
         headers:{
             Authorization:authentication
         }

@@ -10,7 +10,7 @@ function AllYourBid(){
     async function getAllBidProductList()
     {
         const authorization = "Bearer "+localStorage.getItem('token');
-        const response = await axios.get("http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/bid/allYourBids",{
+        const response = await axios.get(`${base_url}/bid/allYourBids`,{
             headers:{
                 Authorization:authorization
             }

@@ -85,7 +85,7 @@ function Home()
       
       console.log(productId);
       
-      const response = await axios.put(`http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/general/buy/${productId}`,{},{
+      const response = await axios.put(`${base_url}/general/buy/${productId}`,{},{
         headers:{
           Authorization:authorization
         }
@@ -121,7 +121,7 @@ function Home()
         let authString="";
         if(token){
         authString = "Bearer "+token;}
-        let response =  axios.get('http://ec2-15-206-194-131.ap-south-1.compute.amazonaws.com:4242/auth/me',{
+        let response =  axios.get(`${base_url}/auth/me`,{
             headers:{
                authorization:authString
             }
