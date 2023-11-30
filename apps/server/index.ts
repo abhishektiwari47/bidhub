@@ -20,7 +20,7 @@ app.get("/done",(req,res)=>{
     res.json({"message":"this is done"})
 });
 
-app.listen(3000,"0.0.0.0", () => {
+app.listen(4242,"0.0.0.0", () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
 
