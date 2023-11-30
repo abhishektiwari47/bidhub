@@ -21,4 +21,4 @@ jobs:
         chmod 600 keyfile
         mkdir -p ~/.ssh
         ssh-keyscan -H ec2-15-206-194-131.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
-        ssh -t -i keyfile -o StrictHostKeyChecking=no ubuntu@ec2-15-206-194-131.ap-south-1.compute.amazonaws.com "sudo bash ~/deploy2.sh" 
+        ssh -t -i keyfile -o StrictHostKeyChecking=no ubuntu@ec2-15-206-194-131.ap-south-1.compute.amazonaws.com "sudo bash ~/deploybidhub.sh" 
