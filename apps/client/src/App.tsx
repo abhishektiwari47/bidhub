@@ -11,6 +11,7 @@ import AllYourBid from './components/buyer/AllYourBids';
 import AddProduct from './components/seller/AddProduct';
 import Accounts from './components/visitor/Account';
 import AddBid from './components/buyer/AddBid';
+import { base_url } from './store/constants';
 const {Account} =Accounts;
 const AllProduct = lazy(()=>import('./components/visitor/AllProducts')) ;
 
