@@ -16,6 +16,7 @@ import SearchIcon2 from '../../assets/svg/SearchIcon2.png';
 import menu from '../../assets/svg/menu.svg';
 import x from '../../assets/svg/x.svg';
 import DayNightToggle from 'react-day-and-night-toggle';
+import { base_url } from "../../store/constants";
 
 function Home()
 {

@@ -6,6 +6,7 @@ import { singleProductDataState, userData } from "../../data/ComponentData";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { isDarkModeState } from "../../data/RelatedStates";
+import { base_url } from "../../store/constants";
 
 // interface Bid {
 //     amount: number,

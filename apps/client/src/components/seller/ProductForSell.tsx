@@ -5,6 +5,7 @@ import DeleteIcon from '../../assets/svg/DeleteIcon.svg';
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { singleProductDataState } from "../../data/ComponentData";
+import { base_url } from "../../store/constants";
 
 interface Bid {
     amount: number,

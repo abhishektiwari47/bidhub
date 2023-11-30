@@ -5,6 +5,7 @@ import axios from 'axios';
 import BidhubDesign from '../../assets/svg/BidhubDesign.svg';
 import { useRecoilState } from 'recoil';
 import { isDarkModeState } from '../../data/RelatedStates';
+import { base_url } from '../../store/constants';
 
 function Auth(){
   const [showComponentA, setShowComponentA] = useState(true);

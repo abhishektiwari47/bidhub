@@ -50,6 +50,7 @@ function AddProduct(){
 
 
 import Webcam from 'react-webcam'
+import { base_url } from "../../store/constants";
 // const WebcamComponent = () => <Webcam />
 const videoConstraints = {
   width: 500,

@@ -1,1 +1,1 @@
-const base_url = "https://bidhub.netlify.app/api";
+export const base_url = "https://bidhub.netlify.app/api";

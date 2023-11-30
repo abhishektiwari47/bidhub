@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { base_url } from "../../store/constants";
 
 type Product = {
     image:string,

@@ -2,6 +2,7 @@ import { useRecoilState,atom } from "recoil";
 import { userData } from "../../data/ComponentData";
 import axios from "axios";
 import { isDarkModeState } from "../../data/RelatedStates";
+import { base_url } from "../../store/constants";
 
 const inputAmountState = atom({
     key:"inputAmountState",

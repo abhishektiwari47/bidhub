@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { productBidsListState, userData } from "../../data/ComponentData";
 import ProductCard from "../visitor/ProductCard";
+import { base_url } from "../../store/constants";
 
 function AllYourBid(){
     const [user] = useRecoilState(userData)
