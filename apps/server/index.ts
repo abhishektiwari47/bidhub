@@ -16,7 +16,7 @@ app.use("/general", express.json(), generalRoutes);
 app.use("/pay", express.json(), paymentRoutes);
 app.use("/event",eventRoutes)
 app.use("/bid",express.json(),bidRoutes);
-app.get("/jj",(req,res)=>{
+app.get("/jjk",(req,res)=>{
     res.json({"message":"this is fuck"})
 });
 
