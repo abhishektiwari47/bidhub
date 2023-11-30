@@ -22,7 +22,7 @@ app.use("/bid", express_1.default.json(), bid_1.default);
 app.get("/done", (req, res) => {
     res.json({ "message": "this is done now 12" });
 });
-app.listen(3000, "0.0.0.0", () => {
+app.listen(4242, "0.0.0.0", () => {
     console.log(`Example app listening at http://localhost:${constants_1.port}`);
 });
 mongoose_1.default.connect(constants_1.connectionString, { dbName: "bidhub" }).then(() => {
