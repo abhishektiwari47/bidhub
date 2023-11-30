@@ -34,3 +34,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Ignore todo-app-class.pem
+todo-app-class.pem
