@@ -295,6 +295,13 @@ router.get('/getQuery',authenticateJwt,async (req,res)=>{
   const userId = req.headers["userId"];
   const query = await Query.find({userId:userId})
   console.log(query);
+  if(query)
+  {
+    res.json(query)
+  }
+  else{
+    res.json({"mes":"not found babe"})
+  }
 })
 router.post('/postQuery',authenticateJwt,async (req,res)=>{
   const userId = req.headers["userId"];
