@@ -6,6 +6,7 @@ import AllYourBoughtProducts from "../buyer/YourBoughtProducts";
 import ProductForSell from "../seller/ProductForSell";
 import AccountComponent from "./Account";
 import AddMoney from "./AddMoney";
+import FloatingButton from "./FloatingButton";
 
 const {Account} = AccountComponent;
 // const AllProduct = lazy(() => import('./AllProducts'));
@@ -45,5 +46,7 @@ export function DisplayArea(){
     
     return <div className={displayStyle} style={{gridTemplateColumns:"repeat(2, 1fr)",verticalAlign:"top"}}>
      {renderPage()}
+     
    </div>
+   
 }
