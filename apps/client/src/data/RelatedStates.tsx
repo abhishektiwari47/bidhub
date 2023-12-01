@@ -63,4 +63,8 @@ const isDarkModeState = atom({
   key:"isDarkModeState",
   default:isDarkMode
 })
-export {fontSizeState,fontSizeLabelState,activeListItemstate,logoutState,buyState,buyProductState,cameraOpenState,menuState,isDarkModeState};
+const isFloatingState = atom({
+  key:"isFloatingState",
+  default:false
+})
+export {fontSizeState,fontSizeLabelState,activeListItemstate,logoutState,buyState,buyProductState,cameraOpenState,menuState,isDarkModeState,isFloatingState};
