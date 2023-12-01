@@ -295,7 +295,21 @@ router.get('/getQuery',authenticateJwt,async (req,res)=>{
   const userId = req.headers["userId"];
   const query = await Query.find({userId:userId})
   console.log(query);
-  
-
+})
+router.post('/postQuery',authenticateJwt,async (req,res)=>{
+  const userId = req.headers["userId"];
+  const query = req.body.query;
+  const newQuery = new Query({
+    userId:userId,
+    query:query,
+    reply:"",
+  });
+  newQuery.save()
+  .then((savedProduct) => {
+    res.status(201).json(savedProduct);
+  })
+  .catch((err) => {
+    res.status(500).json({ error: 'Failed to add this query' });
+  });
 })
 export default router;
