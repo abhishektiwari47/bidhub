@@ -11,7 +11,7 @@ app.use(
   cors()
 )
 
-const stripe = require("stripe")("sk_test_51O6XH8SB4wTdUGUwGmOUHuqFJfHN5ymg7mYqyQWEldgXRQpifGQv8SE5KmlbUCCi0Y92sAS9woJv1rljV6FQJxQa00V7qVvBfR")
+const stripe = require("stripe")("pk_live_51O6XH8SB4wTdUGUwkZZpbh6hxDOApIlsLmSZsBq1osW7gOB51gJxFhqUipXiVJBSIleTHJVXrLNtFWWhBGLp0O4400H4CYNk6A")
 
 
 let x = 10;
@@ -41,8 +41,8 @@ router.post("/create-checkout-session",authenticateJwt, async (req: Request, res
             quantity: 1, 
           },
         ],
-        success_url: "http://localhost:5173/home",
-        cancel_url: "http://localhost:5173/home"
+        success_url: "https://main--bidhub.netlify.app/home",
+        cancel_url: "https://main--bidhub.netlify.app/home"
       })
   
 

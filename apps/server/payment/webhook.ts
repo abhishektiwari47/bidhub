@@ -1,9 +1,9 @@
 
 const express = require('express');
-const stripe = require('stripe')('sk_test_51O6XH8SB4wTdUGUwGmOUHuqFJfHN5ymg7mYqyQWEldgXRQpifGQv8SE5KmlbUCCi0Y92sAS9woJv1rljV6FQJxQa00V7qVvBfR');
+const stripe = require('stripe')('pk_live_51O6XH8SB4wTdUGUwkZZpbh6hxDOApIlsLmSZsBq1osW7gOB51gJxFhqUipXiVJBSIleTHJVXrLNtFWWhBGLp0O4400H4CYNk6A');
 const router = express.Router();
 import { Request, Response, NextFunction, json } from "express";
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 import { Product,User } from "../db";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.

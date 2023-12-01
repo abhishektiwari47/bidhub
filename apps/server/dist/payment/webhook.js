@@ -10,8 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require('express');
-const stripe = require('stripe')('sk_test_51O6XH8SB4wTdUGUwGmOUHuqFJfHN5ymg7mYqyQWEldgXRQpifGQv8SE5KmlbUCCi0Y92sAS9woJv1rljV6FQJxQa00V7qVvBfR');
+const stripe = require('stripe')('pk_live_51O6XH8SB4wTdUGUwkZZpbh6hxDOApIlsLmSZsBq1osW7gOB51gJxFhqUipXiVJBSIleTHJVXrLNtFWWhBGLp0O4400H4CYNk6A');
 const router = express.Router();
+// import mongoose from 'mongoose';
 const db_1 = require("../db");
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const endpointSecret = "whsec_a55cc4d5c9356c608b059a8803d89b327c037bef71795d01694f2beb199f05ec";
