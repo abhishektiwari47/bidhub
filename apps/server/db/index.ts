@@ -33,6 +33,13 @@ const productSchema = new mongoose.Schema({
     buyerId: String,
     bids:[bidSchema||null]
 });
+const querySchema = new mongoose.Schema({
+  userId:String,
+  query:String,
+  reply:String||undefined
+})
+
 
 export const User = mongoose.model('User', userSchema);
 export const Product = mongoose.model('Product', productSchema);
+export const Query = mongoose.model('Query',querySchema);
