@@ -152,7 +152,8 @@ function Home()
     
     const searchHolder = `Hi ${user.username.toString()} , search for a here...`;
     
-    return <div className="p-1 h-[100vh] w-[100%]" style={{backgroundColor:(isDarkMode)?"#03001C":'white'}}>
+    return <div className="relative p-1 h-[100vh] w-[100%]" style={{backgroundColor:(isDarkMode)?"#03001C":'white'}}>
+        <FloatingButton/>
         <nav className="flex items-center justify-between m-5 ">
             <span className="hidden  lg:flex items-center space-x-4">
             <ProfilePhoto user={user} dimention={7}/>
@@ -195,7 +196,7 @@ function Home()
           </div>
         </div>
       )}
-     <FloatingButton/> 
+     
     </div>
     </main>
     </div>
