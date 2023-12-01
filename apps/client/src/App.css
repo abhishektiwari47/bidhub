@@ -29,4 +29,51 @@
   .close:hover {
     color: black;
   }
-  
+
+
+
+/* Customizing Scrollbar Styles */
+/* For Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* For Firefox */
+/* Note: Firefox supports scrollbar-color property in newer versions */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+/* For Microsoft Edge (Chromium-based) */
+*::-ms-scrollbar {
+  width: 12px;
+}
+
+*::-ms-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
+}
+
+*::-ms-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Hiding the Scrollbar */
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Microsoft Edge */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Webkit (Chrome, Safari, Edge) */
+}
