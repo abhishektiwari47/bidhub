@@ -12,8 +12,13 @@ import AddProduct from './components/seller/AddProduct';
 import Accounts from './components/visitor/Account';
 import AddBid from './components/buyer/AddBid';
 import { base_url } from './store/constants';
+import Refund from './components/visitor/Refund';
+import Privacy from './components/visitor/Privacy';
+import Service from './components/visitor/Service';
+import Contact from './components/visitor/Contact';
 const {Account} =Accounts;
 const AllProduct = lazy(()=>import('./components/visitor/AllProducts')) ;
+<link rel="stylesheet" href="../src/App.css" />
 
 function App() {
   return (
@@ -27,6 +32,11 @@ function App() {
         <Route path='/addAProduct' element={<AddProduct/>}/>
        
         <Route path='/allProduct' element={<AllProduct/>}/>
+        <Route path='/termsOfService' element={<Service/>}/>
+        <Route path='/contactUs' element={<Contact/>}/>
+        <Route path='/privacyPolicy' element={<Privacy/>}/>
+        <Route path='/refundPolicy' element={<Refund/>}/>
+       
        
         <Route path='/Account' element={<Account/>}/>
         <Route path='/' element={<InitState/>} />
