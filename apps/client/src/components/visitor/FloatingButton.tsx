@@ -1,10 +1,9 @@
-import { useState } from "react"
+
 import { useRecoilState } from "recoil"
-import { isDarkModeState, isFloatingState } from "../../data/RelatedStates"
+import { isFloatingState } from "../../data/RelatedStates"
 import { useNavigate } from "react-router-dom"
 
 function FloatingButton(){
-    const [isDark] = useRecoilState(isDarkModeState)
     const [isFloating,setIsFloating] = useRecoilState(isFloatingState)
     console.log("the value after rebuild");
     const navigate = useNavigate();

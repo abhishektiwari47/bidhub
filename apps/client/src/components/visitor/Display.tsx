@@ -6,7 +6,6 @@ import AllYourBoughtProducts from "../buyer/YourBoughtProducts";
 import ProductForSell from "../seller/ProductForSell";
 import AccountComponent from "./Account";
 import AddMoney from "./AddMoney";
-import FloatingButton from "./FloatingButton";
 
 const {Account} = AccountComponent;
 // const AllProduct = lazy(() => import('./AllProducts'));
