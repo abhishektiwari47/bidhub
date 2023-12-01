@@ -238,4 +238,25 @@ router.post('/acceptABid/:productId', index_1.authenticateJwt, (req, res) => __a
         res.status(500).json({ error: 'Failed to update user or product' });
     }
 }));
+router.get('/getQuery', index_1.authenticateJwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.headers["userId"];
+    const query = yield db_1.Query.find({ userId: userId });
+    console.log(query);
+}));
+router.post('/postQuery', index_1.authenticateJwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.headers["userId"];
+    const query = req.body.query;
+    const newQuery = new db_1.Query({
+        userId: userId,
+        query: query,
+        reply: "",
+    });
+    newQuery.save()
+        .then((savedProduct) => {
+        res.status(201).json(savedProduct);
+    })
+        .catch((err) => {
+        res.status(500).json({ error: 'Failed to add this query' });
+    });
+}));
 exports.default = router;
