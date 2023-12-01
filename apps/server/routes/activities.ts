@@ -293,11 +293,16 @@ router.post('/acceptABid/:productId',authenticateJwt,async (req,res)=>{
 
 router.get('/getQuery',authenticateJwt,async (req,res)=>{
   const userId = req.headers["userId"];
+  
+  
   const query = await Query.find({userId:userId})
   console.log(query);
   if(query)
   {
-    res.json(query)
+    res.json({
+      "userId":userId,
+      "query":query
+    })
   }
   else{
     res.json({"mes":"not found babe"})

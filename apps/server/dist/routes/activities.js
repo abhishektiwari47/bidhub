@@ -243,7 +243,10 @@ router.get('/getQuery', index_1.authenticateJwt, (req, res) => __awaiter(void 0,
     const query = yield db_1.Query.find({ userId: userId });
     console.log(query);
     if (query) {
-        res.json(query);
+        res.json({
+            "userId": userId,
+            "query": query
+        });
     }
     else {
         res.json({ "mes": "not found babe" });
