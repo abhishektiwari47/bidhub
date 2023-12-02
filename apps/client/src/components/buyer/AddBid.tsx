@@ -133,7 +133,7 @@ function AddBid(){
     <nav><img className="h-6 mx-6 my-6"  src={(isDarkMode)?BackButton2:BackButton} onClick={() => navigate(-1)} alt="" /></nav>
     <div className=" lg:px-20 py-2 lg:flex lg:space-x-32 space-y-5 lg:space-y-0" style={{ gridTemplateColumns:"1fr 1fr",width:"100%"}}>
 
-   <div className="bg-white m-auto shadow-md lg:w-[75%]shadow-gray-800 " style={{height:"85vh"}}>
+   <div className="bg-white m-auto shadow-md lg:w-[75%] shadow-gray-800 " style={{height:"85vh"}}>
      <div className="text-center bg-[#FF6B00] text-white py-2" style={{display:"inline-grid", gridTemplateColumns:"1fr 1fr",width:"100%"}}><div>UserId</div><div>Bid(INR)</div></div>
     {/* Bid List Div */}
      <div className="text-center " style={{height:"70vh",backgroundColor:"white",overflow:"auto", display:"inline-grid", gridTemplateColumns:"1fr 1fr",width:"100%"}}>
