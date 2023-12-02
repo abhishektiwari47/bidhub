@@ -50,7 +50,7 @@ function ProductCard(allProducts:{data:Product,userId:string}){
   
     const userBidAmount = getUserBid(data.bids, userId);
     console.log(userId)
-      return <div key={data._id} className="card mx-auto mb-10 rounded-md overflow-hidden w-[80%] sm:w-[60%] lg:w-[60%]" style={{boxShadow:"0 1px 2px 0", backgroundColor:"#F0EDED",
+      return <div key={data._id} className="card mx-auto mb-10 rounded-md overflow-hidden w-[95%] sm:w-[60%] lg:w-[60%]" style={{boxShadow:"0 1px 2px 0", backgroundColor:"#F0EDED",
         }}>
       <img className="" src={data.image.toString()} alt="Avatar" style={{height:"14em",width:"30em"}}/>
       <div className="container inline-grid grid-cols-2 px-3 py-2">
