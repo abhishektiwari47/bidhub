@@ -11,7 +11,7 @@ app.use(
   cors()
 )
 
-const stripe = require("stripe")("pk_live_51O6XH8SB4wTdUGUwkZZpbh6hxDOApIlsLmSZsBq1osW7gOB51gJxFhqUipXiVJBSIleTHJVXrLNtFWWhBGLp0O4400H4CYNk6A")
+const stripe = require("stripe")("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")
 
 
 let x = 10;
