@@ -128,7 +128,7 @@ function AddBid(){
     
     const navigate = useNavigate();
 
-    return <div className="p-1 h-screen" style={{backgroundColor:(isDarkMode)?"#03001C":"white"}}>
+    return <div className="p-1 lg:h-screen" style={{backgroundColor:(isDarkMode)?"#03001C":"white"}}>
     {/* nav */}
     <nav><img className="h-6 mx-6 my-6"  src={(isDarkMode)?BackButton2:BackButton} onClick={() => navigate(-1)} alt="" /></nav>
     <div className=" px-20 py-2 lg:flex lg:space-x-32 space-y-5 lg:space-y-0" style={{ gridTemplateColumns:"1fr 1fr",width:"100%"}}>
