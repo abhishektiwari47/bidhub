@@ -18,7 +18,7 @@ function FloatingButton(){
        </div>
        
        <div onClick={()=>{setIsFloating(prev=>!prev);console.log(isFloating);
-       }} className="bg-[#FF6B00] w-7 h-7 text-center justify-center items-center align-middle hover:cursor-pointer flex  rounded-full mx-7 text-white shadow shadow-gray-950"><p>#</p></div>
+       }} className="bg-[#FF6B00] w-10 h-10 text-center justify-center items-center align-middle hover:cursor-pointer flex  rounded-full mx-7 text-white shadow shadow-gray-950"><p>#</p></div>
     </div>
 }
 
