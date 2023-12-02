@@ -15,7 +15,7 @@ const stripe = require("stripe")("sk_live_51O6XH8SB4wTdUGUwl6RiZrDEihYsFID1PJ6sL
 
 
 let x = 10;
-
+console.log(stripe);
 
 router.post("/create-checkout-session",authenticateJwt, async (req: Request, res: Response) => {
     try {
