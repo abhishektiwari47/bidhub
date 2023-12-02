@@ -7,6 +7,7 @@ import ProductForSell from "../seller/ProductForSell";
 import AccountComponent from "./Account";
 import AddMoney from "./AddMoney";
 
+
 const {Account} = AccountComponent;
 // const AllProduct = lazy(() => import('./AllProducts'));
 // const AllYourBid = lazy(() => import('../buyer/AllYourBids'));
