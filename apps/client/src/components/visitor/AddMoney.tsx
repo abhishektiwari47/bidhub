@@ -1,8 +1,8 @@
 import { useRecoilState,atom } from "recoil";
 import { userData } from "../../data/ComponentData";
-import axios from "axios";
+// import axios from "axios";
 import { isDarkModeState } from "../../data/RelatedStates";
-import { base_url } from "../../store/constants";
+// import { base_url } from "../../store/constants";
 
 const inputAmountState = atom({
     key:"inputAmountState",
@@ -12,10 +12,10 @@ const inputAmountState = atom({
 function AddMoney(){
     const [user] = useRecoilState(userData);
     const [inputAmount,setInputAmount] = useRecoilState(inputAmountState);
-    let body = {
-        amount:inputAmount*100,
-        userId:user.userId
-    }
+    // let body = {
+    //     amount:inputAmount*100,
+    //     userId:user.userId
+    // }
     // const authorization = "bearer "+localStorage.getItem('token');
     // const pay= async ()=>{
     //   const response =   await axios.post(`${base_url}/pay/create-checkout-session`,body,{
