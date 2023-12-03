@@ -16,7 +16,7 @@ function AddMoney(){
         amount:inputAmount*100,
         userId:user.userId
     }
-    const authorization = "bearer "+localStorage.getItem('token');
+    // const authorization = "bearer "+localStorage.getItem('token');
     // const pay= async ()=>{
     //   const response =   await axios.post(`${base_url}/pay/create-checkout-session`,body,{
     //     headers:{
