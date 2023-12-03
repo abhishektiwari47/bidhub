@@ -30,7 +30,7 @@ interface Product {
 }
 
 function ProductForSell(){
-     const [boughtProducts,setBoughtProducts] = useState([])
+     const [sellProducts,setSellProducts] = useState([])
      const authentication = "Bearer "+localStorage.getItem('token');
      async function deleteProduct(id:string)
      {
@@ -80,14 +80,14 @@ function ProductForSell(){
          const response = await allYourBroughtProducts();
          if(response)
          {
-            setBoughtProducts(response);
+            setSellProducts(response.reverse());
          }
         } 
         fetchData();
     },[productData]);
     const navigate = useNavigate();
     return <div >
-       {boughtProducts.map((element:Product,index:number)=>{
+       {sellProducts.map((element:Product,index:number)=>{
         let highestBid = 0;
         element.bids.forEach((bid)=>{
             if(bid.amount>highestBid)
@@ -116,8 +116,8 @@ function ProductForSell(){
               {element.sold===false?<span className="text-[green]">Active</span>:<span className="text-[red]">Already Sold</span>}
             {element.sold==false?
              
-              <img className="" onClick={async ()=>{let done = await deleteProduct(element._id);if(done){let array =  [...boughtProducts]; array.splice(index,1)
-            ;setBoughtProducts(array)}}} src={DeleteIcon} alt="" />
+              <img className="" onClick={async ()=>{let done = await deleteProduct(element._id);if(done){let array =  [...sellProducts]; array.splice(index,1)
+            ;setSellProducts(array)}}} src={DeleteIcon} alt="" />
             :<></>}
             </div>
             <div className="text-right text-sm">

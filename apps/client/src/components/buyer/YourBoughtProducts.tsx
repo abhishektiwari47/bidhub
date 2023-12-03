@@ -37,7 +37,7 @@ function AllYourBoughtProducts(){
          const response = await allYourBroughtProducts();
          if(response)
          {
-            setBoughtProducts(response);
+            setBoughtProducts(response.reverse());
          }
         } 
         fetchData();
