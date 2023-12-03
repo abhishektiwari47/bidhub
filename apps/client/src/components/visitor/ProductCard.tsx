@@ -58,7 +58,7 @@ function ProductCard(allProducts:{data:Product,userId:string}){
         <h6><b>{data.name.toString()}</b></h6>
         {(userId=="")?
         <div>
-       <button onClick={()=>setBuyPressed(true) } className="shadow-md cursor-pointer bg-green-500 text-white px-2 border-solid border-2 border-white rounded">Buy</button>
+       <button onClick={()=>{setBuyPressed(true);setProductId(data._id)} } className="shadow-md cursor-pointer bg-green-500 text-white px-2 border-solid border-2 border-white rounded">Buy</button>
   
 
         <button onClick={()=>{navigate(`/addBid/${data}`); setProductData(data);}} className="Bid shadow-md text-white px-2 border-solid border-2 border-[white] mx-1 rounded bg-[#FF6B00] ">Bid</button>
