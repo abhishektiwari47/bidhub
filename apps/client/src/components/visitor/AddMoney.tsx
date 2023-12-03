@@ -52,7 +52,10 @@ function AddMoney(){
     <span><SelectAmount value={200} /></span>
     <span><SelectAmount value={500} /></span>
     <span className="hidden lg:inline-block"><SelectAmount value={1000} /></span>
-    <div  className='flex my-5 justify-end  text-right ' ><button className="bg-green-600 p-2 text-white rounded shadow" onClick={()=>{console.log(inputAmount);pay();}}>Proceed</button></div>
+    <div  className='flex my-5 justify-end  text-right ' ><button className="bg-green-600 p-2 text-white rounded shadow" onClick={()=>
+    // {console.log(inputAmount);pay();}
+    {alert("Sorry, Currently this feature is not working : (")}
+  }>Proceed</button></div>
     </div></div></div>
 }
 
