@@ -17,21 +17,21 @@ function AddMoney(){
         userId:user.userId
     }
     const authorization = "bearer "+localStorage.getItem('token');
-    const pay= async ()=>{
-      const response =   await axios.post(`${base_url}/pay/create-checkout-session`,body,{
-        headers:{
-            Authorization:authorization
-        }
-      })
+    // const pay= async ()=>{
+    //   const response =   await axios.post(`${base_url}/pay/create-checkout-session`,body,{
+    //     headers:{
+    //         Authorization:authorization
+    //     }
+    //   })
       
-      if(response.status==200)
-      {
-        window.location=response.data.url;
-      }
-      else{
-        console.log(response.status)
-      }
-    }
+    //   if(response.status==200)
+    //   {
+    //     window.location=response.data.url;
+    //   }
+    //   else{
+    //     console.log(response.status)
+    //   }
+    // }
 
     const [isDarkMode]= useRecoilState(isDarkModeState)
     return <div >
