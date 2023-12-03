@@ -33,7 +33,7 @@ function Auth(){
       {showComponentA ? <Login/> : <Signup />}
       
       <p className='font-medium text-center m-3'>{showComponentA ? "New User? " : "Existing User? "}
-      <a className='text-[#FF6B00] ' onClick={toggleComponent}>{showComponentA ? "SignUp" : "Login"}</a></p>
+      <a className='text-[#FF6B00] hover:cursor-pointer' onClick={toggleComponent}>{showComponentA ? "SignUp" : "Login"}</a></p>
       </div>
     </div>
   );

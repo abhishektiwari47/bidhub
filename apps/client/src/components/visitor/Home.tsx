@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
 import {productListState, userData} from "../../data/ComponentData"
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AddMoneyIcon from '../../assets/svg/AddMoneyIcon.svg';
 import {  activeListItemstate, buyProductState, buyState, isDarkModeState, logoutState, menuState } from "../../data/RelatedStates";
 import MenuList from "./MenuList";
@@ -18,13 +18,14 @@ import x from '../../assets/svg/x.svg';
 import DayNightToggle from 'react-day-and-night-toggle';
 import { base_url } from "../../store/constants";
 import FloatingButton from "./FloatingButton";
+import Confetti from 'react-confetti';
 
 function Home()
 {
     const [user,setUser] = useRecoilState(userData)
     const [isDialogOpen, setDialogOpen] = useRecoilState(logoutState);
     const [isBuyPressed, setBuyPressed] = useRecoilState(buyState);
-    
+    const [confetti, setConfetti] = useState(false);
     const [isDarkMode,SetIsDarkMode] = useRecoilState(isDarkModeState)
     const navigate = useNavigate();
     //This will close the opened Dialog box of logout...
@@ -74,7 +75,7 @@ function Home()
       amount: number,
       userId: mongoose.Types.ObjectId,
     }
-    
+
 
     const [productList,setProductList]=useRecoilState(productListState)
     const [menuOpen,setMenuOpen] = useRecoilState(menuState)
@@ -93,9 +94,16 @@ function Home()
           Authorization:authorization
         }
           });
-          console.log(response.status);
-        if(response.status===200)
+         if(response.data.message=="Low Balance")
+         {
+             console.log("low balance");
+             closeDialog();
+             alert("Sorry, Your Account Has Low Balance.")
+             
+         }
+       else if(response.status===200)
         {
+          setConfetti(true);
           let array = [...productList];
           
           let index = array.findIndex((element:Product)=>element._id==productId);
@@ -113,6 +121,10 @@ function Home()
           array.splice(index,1);
           setProductList(array);
           closeDialog();
+          setTimeout(() => {
+            setConfetti(false);
+          }, 5000);
+          setActiveListItem(2);
         }
         else{
           console.log(response.data)
@@ -183,7 +195,7 @@ function Home()
     <div style={{height:"80%", display:"block",}}>
     <MenuList/>  
    <VerticalLine/>
-  
+   {confetti && <Confetti />}
     <DisplayArea/>
     {(isDialogOpen||isBuyPressed) && (
         <div className="overlay">
