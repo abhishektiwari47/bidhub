@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { useRecoilState } from "recoil";
-import {  buyState } from "../../data/RelatedStates";
+import {  buyProductState, buyState } from "../../data/RelatedStates";
 
 import { singleProductDataState } from "../../data/ComponentData";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +33,7 @@ function ProductCard(allProducts:{data:Product,userId:string}){
   const [isBuyPressed, setBuyPressed] = useRecoilState(buyState);
   console.log(isBuyPressed);
   
-  // const [productId,setProductId] = useRecoilState(buyProductState);
+  const [productId,setProductId] = useRecoilState(buyProductState);
     const {data,userId} = allProducts
     const [productData,setProductData] = useRecoilState(singleProductDataState);
    console.log(productData);
