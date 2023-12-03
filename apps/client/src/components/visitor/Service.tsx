@@ -34,11 +34,11 @@ function Service() {
           <p className="mb-4">
             <strong>4. Refund Policy</strong>
             <br />
-            a. We strive to provide a satisfactory experience to our users. If you are not satisfied with our services, you may be eligible for a refund based on our Refund Policy.
+            a. We strive to provide a satisfactory experience to our users. If you are not satisfied with our services, you may be eligible for a refund based on our Refund Policy. You can ask for a refund of payments of last 30 days.
             <br />
             b. In the event of a canceled purchase, Bidhub is committed to ensuring customer satisfaction. We will promptly refund the entire amount to your Bidhub wallet, providing a seamless and efficient resolution to enhance your overall shopping experience.
             <br />
-            c. Refunds will be processed in accordance with our Refund Policy.
+            c. You can initiate the withdraw process by just visiting contact us page as asking for a refund. We will reply you and proceed with your refund within 1 to 3 bussiness days and your refund will be completed within 10 bussiness days.
           </p>
 
           {/* Add other sections based on your Terms of Service content */}
