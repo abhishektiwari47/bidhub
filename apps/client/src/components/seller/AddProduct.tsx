@@ -118,6 +118,28 @@ console.log(image);
     }
   }, []); // Empty dependency array
 
+  // const handleFileChange = (e:any) => {
+  //   const selectedFile = e.target.files[0];
+
+  //   if (selectedFile) {
+  //     const reader = new FileReader();
+
+  //     reader.onloadend = () => {
+  //       const dataURL = reader.result;
+  //       if(dataURL!=null)
+  //       setImage(dataURL.toString());
+  //     if(dataURL!=null)
+  //     setPicture(dataURL.toString())
+  //     console.log("this is image");
+      
+  //       console.log(image);
+        
+  //     };
+
+  //     reader.readAsDataURL(selectedFile);
+  //   }
+  // };
+
   return (
     <div  >
   
@@ -166,7 +188,11 @@ console.log(image);
         </button>
       )}
       {/* here */}
-     <div onClick={()=>{}} className="inline-block  px-8 cursor-pointer rounded-lg  mx-5 bg-[#D9D9D9]"><img className="inline-block h-10" src={Folder} alt="" /></div></div>
+      {/* <div className="text-center mt-3">
+        <input type="file" accept="image/jpeg, image/png" onChange={handleFileChange} />
+      </div> */}
+     {/* <div onClick={()=>{}} className="inline-block  px-8 cursor-pointer rounded-lg  mx-5 bg-[#D9D9D9]"><img className="inline-block h-10" src={Folder} alt="" /></div> */}
+     </div>
     </div>
   </div>
   );
