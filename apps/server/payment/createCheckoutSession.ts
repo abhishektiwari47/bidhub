@@ -41,8 +41,8 @@ router.post("/create-checkout-session",authenticateJwt, async (req: Request, res
             quantity: 1, 
           },
         ],
-        success_url: "https://main--bidhub.netlify.app/home",
-        cancel_url: "https://main--bidhub.netlify.app/home"
+        success_url: "https://bidhub.netlify.app",
+        cancel_url: "https://bidhub.netlify.app"
       })
   
 
