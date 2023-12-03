@@ -40,8 +40,8 @@ function Auth(){
 }
 
 const Login = () => {
-  const [username, setUsername] = useState('Karan');
-  const [password, setPassword] = useState('test');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   let body = { username, password };
   const handleLogin = async () => {
