@@ -46,9 +46,6 @@ function AddProduct(){
      </div>
     </div>
 }
-
-
-
 import Webcam from 'react-webcam'
 import { base_url } from "../../store/constants";
 // const WebcamComponent = () => <Webcam />
