@@ -55,7 +55,7 @@ import { base_url } from "../../store/constants";
 const videoConstraints = {
   width: 500,
   height: 400,
-  facingMode: 'user',
+  facingMode: 'environment',
 }
 
 // function downloadFile(file) {
