@@ -1,13 +1,13 @@
 
 const express = require('express');
-const stripe = require('stripe')('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');
+const stripe = require('stripe')('sk_test_51O6XH8SB4wTdUGUwGmOUHuqFJfHN5ymg7mYqyQWEldgXRQpifGQv8SE5KmlbUCCi0Y92sAS9woJv1rljV6FQJxQa00V7qVvBfR');
 const router = express.Router();
 import { Request, Response, NextFunction, json } from "express";
 // import mongoose from 'mongoose';
 import { Product,User } from "../db";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
-const endpointSecret = "whsec_236e8d26e32237b9448f99676651ffb2c9bbd93429cdec78bacebbb8ff8fa81e";
+const endpointSecret = "whsec_a55cc4d5c9356c608b059a8803d89b327c037bef71795d01694f2beb199f05ec";
 let count =0;
 router.post('/webhook', express.raw({type: 'application/json'}), async (request:Request, response:Response) => {
   const sig = request.headers['stripe-signature'];
