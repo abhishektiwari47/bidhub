@@ -34,6 +34,8 @@ function ProductCard(allProducts:{data:Product,userId:string}){
   console.log(isBuyPressed);
   
   const [productId,setProductId] = useRecoilState(buyProductState);
+  console.log(productId);
+  
     const {data,userId} = allProducts
     const [productData,setProductData] = useRecoilState(singleProductDataState);
    console.log(productData);
