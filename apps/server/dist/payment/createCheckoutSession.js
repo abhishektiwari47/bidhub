@@ -18,7 +18,7 @@ const cors = require("cors");
 app.use(express.json());
 const router = express.Router();
 app.use(cors());
-const stripe = require("stripe")("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");
+const stripe = require("stripe")("sk_test_51O6XH8SB4wTdUGUwGmOUHuqFJfHN5ymg7mYqyQWEldgXRQpifGQv8SE5KmlbUCCi0Y92sAS9woJv1rljV6FQJxQa00V7qVvBfR");
 let x = 10;
 console.log(stripe);
 router.post("/create-checkout-session", middleware_1.authenticateJwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
