@@ -7,7 +7,7 @@ import { imageState } from "../../data/ComponentData";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {activeListItemstate, isDarkModeState} from '../../data/RelatedStates';
-import Folder from '../../assets/svg/Folder.svg';
+// import Folder from '../../assets/svg/Folder.svg';
 import Camera from '../../assets/svg/Camera.svg';
 
 
@@ -41,8 +41,7 @@ function AddProduct(){
        <div className="m-auto flex justify-center items-center my-3"  style={{height:"85vh",  width:"75%" }}>
            {/* form */}
      <AddProductCard/>
-       </div>
-        
+       </div> 
      </div>
     </div>
 }
