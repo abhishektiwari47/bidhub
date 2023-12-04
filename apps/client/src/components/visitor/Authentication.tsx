@@ -50,7 +50,13 @@ const Login = () => {
       console.log(response.data);
       
       const data = response.data;
-      if (data.token) {
+      if(data.status==411){
+        alert(data.message)
+    }
+    if(data.status==403){
+      alert(data.message)
+  }
+   else if (data.token) {
           localStorage.setItem("token", data.token)
           navigate("/home")
       } else {
@@ -101,9 +107,12 @@ const Login = () => {
 
       
       const data = response.data;
-      if(data.status==441){
+      if(data.status==411){
           alert(data.message)
       }
+      if(data.status==403){
+        alert(data.message)
+    }
      else if (data.token) {
           localStorage.setItem("token", data.token)
          navigate('/home')
