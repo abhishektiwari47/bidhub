@@ -13,7 +13,7 @@ router.post('/signup', async (req, res) => {
     if(!parseResponse.success)
     {
       return res.status(411).json({
-        msg:"err"
+        message:"Please choose a shorter Username"
       })
     }
     const {username,password,hostelName,hostelRoom,fullName,imageLink} = req.body;
@@ -33,7 +33,7 @@ router.post('/signup', async (req, res) => {
     if(!parseResponse.success)
     {
       return res.status(411).json({
-        msg:"err"
+       message:"Either username or password is wrong."
       })
     }
     const { username, password } = req.body;

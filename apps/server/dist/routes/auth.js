@@ -23,7 +23,7 @@ router.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, function*
     const parseResponse = validation_1.InputValidation.safeParse(req.body);
     if (!parseResponse.success) {
         return res.status(411).json({
-            msg: "err"
+            message: "Please choose a shorter Username"
         });
     }
     const { username, password, hostelName, hostelRoom, fullName, imageLink } = req.body;
@@ -42,7 +42,7 @@ router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* 
     const parseResponse = validation_1.InputValidation.safeParse(req.body);
     if (!parseResponse.success) {
         return res.status(411).json({
-            msg: "err"
+            message: "Either username or password is wrong."
         });
     }
     const { username, password } = req.body;
