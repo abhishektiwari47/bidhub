@@ -101,7 +101,10 @@ const Login = () => {
 
       
       const data = response.data;
-      if (data.token) {
+      if(data.status==441){
+          alert(data.message)
+      }
+     else if (data.token) {
           localStorage.setItem("token", data.token)
          navigate('/home')
       } else {
