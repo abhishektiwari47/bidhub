@@ -209,8 +209,6 @@ router.post('/acceptABid/:productId',authenticateJwt,async (req,res)=>{
   const sellerId = req.headers["userId"];
   const userId = req.body.userId;
   const productId = req.params.productId;
-  
-
   try {
     const product = await Product.findById(productId);
     
@@ -252,6 +250,7 @@ router.post('/acceptABid/:productId',authenticateJwt,async (req,res)=>{
       user.balance=user.balance-bid.amount;
       product.sellPrice=bid.amount;
       seller.balance=x;
+      console.log(user.balance);
       }
       return bid?.userId?.toString()==userId})
    if(findBidIndex==-1)
@@ -260,7 +259,7 @@ router.post('/acceptABid/:productId',authenticateJwt,async (req,res)=>{
    }
 
     let allBids = product.bids;
-    
+    await user.save();
     allBids.forEach( async (element,index,array) => {
       const tempUser = await User.findById(element.userId);
       if(tempUser && element.amount!=undefined){
@@ -277,7 +276,7 @@ router.post('/acceptABid/:productId',authenticateJwt,async (req,res)=>{
     //   { new: true }
     // );
     await product.save();
-    await user.save();
+   
     await seller.save();
     res.json({message:"Done"});
 

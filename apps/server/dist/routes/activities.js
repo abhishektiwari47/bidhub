@@ -208,6 +208,7 @@ router.post('/acceptABid/:productId', index_1.authenticateJwt, (req, res) => __a
                 user.balance = user.balance - bid.amount;
                 product.sellPrice = bid.amount;
                 seller.balance = x;
+                console.log(user.balance);
             }
             return ((_b = bid === null || bid === void 0 ? void 0 : bid.userId) === null || _b === void 0 ? void 0 : _b.toString()) == userId;
         });
@@ -215,6 +216,7 @@ router.post('/acceptABid/:productId', index_1.authenticateJwt, (req, res) => __a
             return res.json({ error: "No Bid for this user" });
         }
         let allBids = product.bids;
+        yield user.save();
         allBids.forEach((element, index, array) => __awaiter(void 0, void 0, void 0, function* () {
             const tempUser = yield db_1.User.findById(element.userId);
             if (tempUser && element.amount != undefined) {
@@ -229,7 +231,6 @@ router.post('/acceptABid/:productId', index_1.authenticateJwt, (req, res) => __a
         //   { new: true }
         // );
         yield product.save();
-        yield user.save();
         yield seller.save();
         res.json({ message: "Done" });
     }
